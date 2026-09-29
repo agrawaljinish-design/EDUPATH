@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skill Gaps — EduPath</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo-icon">🎓</div>
+        <div><div class="sidebar-logo-text">EduPath</div><span class="sidebar-badge">Adaptive AI</span></div>
+      </div>
+      <div class="nav-section-title">Personalized Learning</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="dashboard.html"><span class="nav-icon">📊</span> Dashboard</a></li>
+        <li class="nav-item"><a href="profile.html"><span class="nav-icon">👤</span> Learner Profile</a></li>
+        <li class="nav-item"><a href="resume.html"><span class="nav-icon">📄</span> Resume Upload</a></li>
+        <li class="nav-item active"><a href="skills.html"><span class="nav-icon">🎯</span> Skill Gaps</a></li>
+        <li class="nav-item"><a href="roadmap.html"><span class="nav-icon">🗺️</span> Roadmap Timeline</a></li>
+        <li class="nav-item"><a href="plan.html"><span class="nav-icon">📅</span> Today's Plan</a></li>
+        <li class="nav-item"><a href="assessment.html"><span class="nav-icon">📝</span> Assessments</a></li>
+        <li class="nav-item"><a href="revision.html"><span class="nav-icon">🔄</span> Revision Queue</a></li>
+        <li class="nav-item"><a href="projects.html"><span class="nav-icon">🚀</span> Projects</a></li>
+        <li class="nav-item"><a href="chat.html"><span class="nav-icon">💬</span> AI Companion</a></li>
+      </ul>
+      <div class="nav-section-title">Peer Collaboration</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="peers.html"><span class="nav-icon">👥</span> Peer Discovery</a></li>
+        <li class="nav-item"><a href="friends.html"><span class="nav-icon">🤝</span> Friends</a></li>
+        <li class="nav-item"><a href="doubts.html"><span class="nav-icon">❓</span> Doubt Forum</a></li>
+        <li class="nav-item"><a href="groups.html"><span class="nav-icon">🏢</span> Study Groups</a></li>
+        <li class="nav-item"><a href="community.html"><span class="nav-icon">🌐</span> Community Feed</a></li>
+      </ul>
+      <div class="nav-section-title">Competitive Learning</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="challenges.html"><span class="nav-icon">⚡</span> Challenges</a></li>
+        <li class="nav-item"><a href="leaderboard.html"><span class="nav-icon">🏆</span> Leaderboard</a></li>
+        <li class="nav-item"><a href="badges.html"><span class="nav-icon">🎖️</span> Badges</a></li>
+        <li class="nav-item"><a href="progress.html"><span class="nav-icon">📈</span> Analytics</a></li>
+        <li class="nav-item"><a href="reports.html"><span class="nav-icon">📑</span> Weekly Reports</a></li>
+      </ul>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <div class="topbar-search-box">
+            <input type="text" class="topbar-search-input" placeholder="Search skills, gaps... (Press /)">
+            <span class="topbar-search-key">/</span>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <div id="topbarStreak" class="metric-pill streak">🔥 1d</div>
+          <div id="topbarXP" class="metric-pill xp">⭐ 0 XP</div>
+          <div id="modeIndicator" class="mode-badge real">👤 Real Learner</div>
+          <button id="btnImStuck" class="btn-stuck">🚨 I'm Stuck</button>
+          <a href="profile.html" class="user-avatar-pill">
+            <div id="topbarAvatarText" class="user-avatar-circle">L</div>
+            <span id="topbarUserName" style="font-size:13px;font-weight:600;color:#fff;">Learner</span>
+          </a>
+          <a href="login.html" class="btn btn-secondary btn-sm">Switch</a>
+        </div>
+      </header>
+
+      <div class="page-body">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px; margin-bottom:28px;">
+          <div>
+            <h1 style="font-size:28px; font-weight:900; color:#fff; letter-spacing:-0.03em; margin-bottom:6px;">🎯 Skill Gap Analysis</h1>
+            <p style="color:var(--text-secondary); font-size:14px;">AI-benchmarked gaps for your target role. Click Assess to run a live skill check.</p>
+          </div>
+          <div style="display:flex; gap:10px; align-items:center;">
+            <select id="roleFilter" class="form-select" style="width:220px;" onchange="reloadGaps()">
+              <option value="">Current Target Role</option>
+              <option value="AI/ML Engineer">AI/ML Engineer</option>
+              <option value="Full Stack Developer">Full Stack Developer</option>
+              <option value="Data Engineer">Data Engineer</option>
+              <option value="DevOps Engineer">DevOps Engineer</option>
+              <option value="Backend Developer">Backend Developer</option>
+            </select>
+            <button class="btn btn-primary" onclick="reloadGaps()">Refresh Analysis</button>
+          </div>
+        </div>
+
+        <!-- Summary Cards -->
+        <div class="stats-grid" style="margin-bottom:28px;">
+          <div class="stat-card">
+            <div class="stat-header">
+              <span class="stat-label">Critical Gaps</span>
+              <div class="stat-icon-wrapper" style="background:rgba(239,68,68,0.12); color:#F87171;">⚠️</div>
+            </div>
+            <div class="stat-value" id="countCritical" style="color:#F87171;">—</div>
+            <div style="font-size:12px; color:var(--text-muted); margin-top:6px;">Must learn ASAP to qualify</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-header">
+              <span class="stat-label">High Priority</span>
+              <div class="stat-icon-wrapper" style="background:rgba(245,158,11,0.12); color:#FBBF24;">🟡</div>
+            </div>
+            <div class="stat-value" id="countHigh" style="color:#FBBF24;">—</div>
+            <div style="font-size:12px; color:var(--text-muted); margin-top:6px;">Important for role readiness</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-header">
+              <span class="stat-label">Medium Priority</span>
+              <div class="stat-icon-wrapper" style="background:rgba(6,182,212,0.12); color:#67E8F9;">🔵</div>
+            </div>
+            <div class="stat-value" id="countMedium" style="color:#67E8F9;">—</div>
+            <div style="font-size:12px; color:var(--text-muted); margin-top:6px;">Nice to have for differentiation</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-header">
+              <span class="stat-label">Total Gaps Found</span>
+              <div class="stat-icon-wrapper" style="background:rgba(124,58,237,0.12); color:#C4B5FD;">📊</div>
+            </div>
+            <div class="stat-value" id="countTotal">—</div>
+            <div style="font-size:12px; color:var(--text-muted); margin-top:6px;">Benchmarked vs role requirements</div>
+          </div>
+        </div>
+
+        <!-- Skill Gap List -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">📋 Gap Details</h3>
+            <a href="roadmap.html" class="btn btn-primary btn-sm">Generate Roadmap →</a>
+          </div>
+          <div id="skillGapList" style="display:flex; flex-direction:column; gap:14px;">
+            <div style="color:var(--text-muted); font-size:14px; padding:20px; text-align:center;">Loading skill gap analysis...</div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- I'm Stuck Modal -->
+  <div id="stuckModal" class="modal-overlay">
+    <div class="modal-card">
+      <button id="stuckModalClose" class="modal-close">✕</button>
+      <h3 style="font-size:20px; font-weight:800; color:#fff; margin-bottom:6px;">🚨 Need Help?</h3>
+      <p style="color:var(--text-muted); font-size:13px; margin-bottom:20px;">Tell us what's blocking you and EduPath will adapt your roadmap.</p>
+      <div class="form-group">
+        <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px;">
+          <button type="button" class="stuck-reason-chip selected" data-reason="I don't understand the concept">I don't understand the concept</button>
+          <button type="button" class="stuck-reason-chip" data-reason="I'm getting wrong answers">I'm getting wrong answers</button>
+          <button type="button" class="stuck-reason-chip" data-reason="The exercises are too difficult">Exercises too difficult</button>
+          <button type="button" class="stuck-reason-chip" data-reason="Something else...">Something else...</button>
+        </div>
+        <input type="hidden" id="stuckReasonChoice" value="I don't understand the concept">
+      </div>
+      <div class="form-group"><label class="form-label">Blocking skill</label><input type="text" id="stuckSkillInput" class="form-input" placeholder="e.g. SQL & Data Querying"></div>
+      <div class="form-group"><label class="form-label">Specific topic</label><input type="text" id="stuckTopicInput" class="form-input" placeholder="e.g. Multi-table JOINs"></div>
+      <button id="stuckFormSubmit" class="btn btn-primary" style="width:100%;">Trigger Adaptive Replanning ⚡</button>
+      <div id="stuckInterventionResult" style="display:none; margin-top:20px;"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    let currentUid, currentProfile;
+    document.addEventListener("DOMContentLoaded", async () => {
+      currentUid = getUserId();
+      currentProfile = await api.get(`/profile/${currentUid}`);
+      await loadGaps(currentProfile.target_role);
+    });
+
+    async function reloadGaps() {
+      const sel = document.getElementById("roleFilter").value;
+      const role = sel || currentProfile?.target_role || "AI/ML Engineer";
+      await loadGaps(role);
+    }
+
+    async function loadGaps(role) {
+      const uid = currentUid || getUserId();
+      try {
+        const data = await api.post("/skill-gaps/analyze", { user_id: uid, target_role: role });
+        const gaps = data.gaps || [];
+        document.getElementById("countTotal").innerText = gaps.length;
+        document.getElementById("countCritical").innerText = gaps.filter(g=>g.gap_level==="Critical").length;
+        document.getElementById("countHigh").innerText = gaps.filter(g=>g.gap_level==="High").length;
+        document.getElementById("countMedium").innerText = gaps.filter(g=>g.gap_level==="Medium").length;
+
+        const list = document.getElementById("skillGapList");
+        if (gaps.length === 0) {
+          list.innerHTML = "<p style='color:var(--text-muted); text-align:center; padding:40px 0;'>🎉 No gaps detected for this role! You're ready to advance.</p>";
+          return;
+        }
+        list.innerHTML = gaps.map(g => {
+          const lvlColor = g.gap_level === "Critical" ? "danger" : (g.gap_level === "High" ? "warning" : "info");
+          return `
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; padding:18px; background:rgba(255,255,255,0.02); border:1px solid var(--border-subtle); border-radius:12px; gap:16px; flex-wrap:wrap; transition:all 0.2s;">
+            <div style="flex:1; min-width:200px;">
+              <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
+                <strong style="color:#fff; font-size:15px;">${g.skill}</strong>
+                <span class="badge badge-${lvlColor}">${g.gap_level}</span>
+              </div>
+              <p style="font-size:13px; color:var(--text-secondary); line-height:1.5; margin-bottom:8px;">${g.reason}</p>
+              <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                <span style="font-size:12px; color:var(--text-muted);">Current: <strong style="color:#fff;">${g.current_confidence ?? 0}%</strong></span>
+                <span style="color:var(--text-muted);">→</span>
+                <span style="font-size:12px; color:var(--text-muted);">Target: <strong style="color:#C4B5FD;">${g.required_level ?? 0}%</strong></span>
+                ${g.priority != null ? `<span style="font-size:12px; color:var(--text-muted);">Priority: <strong style="color:#fff;">${g.priority}</strong></span>` : ''}
+              </div>
+              ${g.dependencies && g.dependencies.length ? `<div style="font-size:12px; color:var(--text-muted); margin-top:6px;">Depends on: ${g.dependencies.join(", ")}</div>` : ''}
+            </div>
+            <div style="display:flex; gap:8px; align-items:center; flex-shrink:0;">
+              <a href="assessment.html?skill=${encodeURIComponent(g.skill)}" class="btn btn-secondary btn-sm">Assess 📝</a>
+              <a href="roadmap.html" class="btn btn-primary btn-sm">Roadmap →</a>
+            </div>
+          </div>`;
+        }).join("");
+      } catch(e) {
+        document.getElementById("skillGapList").innerHTML = "<p style='color:var(--text-muted); text-align:center; padding:20px;'>Failed to load gap analysis. Check backend connection.</p>";
+      }
+    }
+  </script>
+</body>
+</html>

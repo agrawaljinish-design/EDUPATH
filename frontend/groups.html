@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Study Groups — EduPath</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .group-circle-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.2s ease;
+    }
+    .group-circle-card:hover {
+      border-color: rgba(124, 58, 237, 0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo-icon">🎓</div>
+        <div>
+          <div class="sidebar-logo-text">EduPath</div>
+          <span class="sidebar-badge">Adaptive AI</span>
+        </div>
+      </div>
+      <div class="nav-section-title">Personalized Learning</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="dashboard.html"><span class="nav-icon">📊</span> Dashboard</a></li>
+        <li class="nav-item"><a href="profile.html"><span class="nav-icon">👤</span> Learner Profile</a></li>
+        <li class="nav-item"><a href="resume.html"><span class="nav-icon">📄</span> Resume Upload</a></li>
+        <li class="nav-item"><a href="skills.html"><span class="nav-icon">🎯</span> Skill Gaps</a></li>
+        <li class="nav-item"><a href="roadmap.html"><span class="nav-icon">🗺️</span> Roadmap Timeline</a></li>
+        <li class="nav-item"><a href="plan.html"><span class="nav-icon">📅</span> Today's Plan</a></li>
+        <li class="nav-item"><a href="assessment.html"><span class="nav-icon">📝</span> Assessments</a></li>
+        <li class="nav-item"><a href="revision.html"><span class="nav-icon">🔄</span> Revision Queue</a></li>
+        <li class="nav-item"><a href="projects.html"><span class="nav-icon">🚀</span> Projects</a></li>
+        <li class="nav-item"><a href="chat.html"><span class="nav-icon">💬</span> AI Companion</a></li>
+      </ul>
+      <div class="nav-section-title">Peer Collaboration</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="peers.html"><span class="nav-icon">👥</span> Peer Discovery</a></li>
+        <li class="nav-item"><a href="friends.html"><span class="nav-icon">🤝</span> Friends</a></li>
+        <li class="nav-item"><a href="doubts.html"><span class="nav-icon">❓</span> Doubt Forum</a></li>
+        <li class="nav-item active"><a href="groups.html"><span class="nav-icon">🏢</span> Study Groups</a></li>
+        <li class="nav-item"><a href="community.html"><span class="nav-icon">🌐</span> Community Feed</a></li>
+      </ul>
+      <div class="nav-section-title">Competitive Learning</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="challenges.html"><span class="nav-icon">⚡</span> Challenges</a></li>
+        <li class="nav-item"><a href="leaderboard.html"><span class="nav-icon">🏆</span> Leaderboard</a></li>
+        <li class="nav-item"><a href="badges.html"><span class="nav-icon">🎖️</span> Badges</a></li>
+        <li class="nav-item"><a href="progress.html"><span class="nav-icon">📈</span> Analytics</a></li>
+        <li class="nav-item"><a href="reports.html"><span class="nav-icon">📑</span> Weekly Reports</a></li>
+      </ul>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <div class="topbar-search-box">
+            <input type="text" class="topbar-search-input" placeholder="Search study groups... (Press /)">
+            <span class="topbar-search-key">/</span>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <div id="topbarStreak" class="metric-pill streak">🔥 1d</div>
+          <div id="topbarXP" class="metric-pill xp">⭐ 0 XP</div>
+          <div id="modeIndicator" class="mode-badge real">👤 Real Learner</div>
+          <button id="btnImStuck" class="btn-stuck">🚨 I'm Stuck</button>
+          <a href="profile.html" class="user-avatar-pill">
+            <div id="topbarAvatarText" class="user-avatar-circle">L</div>
+            <span id="topbarUserName" style="font-size:13px;font-weight:600;color:#fff;">Learner</span>
+          </a>
+          <a href="login.html" class="btn btn-secondary btn-sm">Switch</a>
+        </div>
+      </header>
+
+      <div class="page-body">
+        <div style="margin-bottom: 24px;">
+          <h1 style="font-size:28px; font-weight:900; color:#fff; letter-spacing:-0.03em; margin-bottom:6px;">🏢 Collaborative Study Groups</h1>
+          <p style="color:var(--text-secondary); font-size:14px;">Join targeted study cohorts, share tips on tough concepts, and work through roadmap milestones together.</p>
+        </div>
+
+        <!-- Create Group Card -->
+        <div class="card" style="margin-bottom: 28px;">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">Form a New Study Group</h3>
+              <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Host a focused circle for peers pursuing similar tracks</p>
+            </div>
+            <span class="tag tag-medium">Peer Network</span>
+          </div>
+          <form id="createGroupForm">
+            <div class="grid-2">
+              <div class="form-group">
+                <label class="form-label">Group Name</label>
+                <input type="text" id="grpName" class="form-input" placeholder="e.g. AI & ML Spring Cohort" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Target Role Track</label>
+                <input type="text" id="grpRole" class="form-input" placeholder="e.g. AI/ML Engineer, Full Stack, Data Analyst">
+              </div>
+            </div>
+            <div class="grid-2">
+              <div class="form-group">
+                <label class="form-label">Group Mission / Description</label>
+                <input type="text" id="grpDesc" class="form-input" placeholder="e.g. Daily accountability for practice coding exercises and project reviews" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Focus Skills (Comma-separated)</label>
+                <input type="text" id="grpSkills" class="form-input" placeholder="e.g. Python, Machine Learning, SQL, PyTorch">
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary" style="padding: 12px 24px;">Create Study Group 🚀</button>
+          </form>
+        </div>
+
+        <!-- Groups List Grid -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">🌐 Active Study Circles</h3>
+              <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Join open groups to see peer questions and discussions</p>
+            </div>
+          </div>
+          <div id="groupsGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px;">
+            <div style="text-align:center; padding:30px; color:var(--text-muted); grid-column:1/-1;">Loading study circles...</div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Stuck Modal -->
+  <div id="stuckModal" class="modal-overlay">
+    <div class="modal-card">
+      <button id="stuckModalClose" class="modal-close">✕</button>
+      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+        <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(239, 68, 68, 0.2); display: flex; align-items: center; justify-content: center; font-size: 20px;">🚨</div>
+        <div>
+          <h3 style="font-family: var(--font-heading); font-size: 20px; font-weight: 700; color: #fff;">Need Help? Let's Adapt Your Path</h3>
+          <p style="font-size: 13px; color: var(--text-muted);">EduPath will adaptively insert targeted reinforcement.</p>
+        </div>
+      </div>
+      <form id="stuckForm">
+        <div class="form-group">
+          <label class="form-label">Which skill or concept is blocking you?</label>
+          <input type="text" id="stuckSkillInput" class="form-input" placeholder="e.g. SQL & Data Querying, NumPy, Python" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Specific topic or obstacle (Optional)</label>
+          <input type="text" id="stuckTopicInput" class="form-input" placeholder="e.g. Multi-table JOINs, broadcasting">
+        </div>
+        <button type="button" id="stuckFormSubmit" class="btn btn-primary" style="width: 100%;">Trigger Adaptive Replanning ⚡</button>
+      </form>
+      <div id="stuckInterventionResult" style="display: none;"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      await loadGroups();
+    });
+
+    async function loadGroups() {
+      const currentUserId = getUserId();
+      try {
+        const res = await api.get("/groups");
+        let groups = res.groups || [];
+
+        if (groups.length === 0) {
+          await api.post("/groups", {
+            user_id: "peer_sarah_ml",
+            name: "Data & ML Deep Divers",
+            description: "Collaborative cohort tackling Pandas, Scikit-Learn pipelines, and model evaluation.",
+            skills: ["Python", "NumPy", "Pandas", "Machine Learning"],
+            target_role: "AI/ML Engineer"
+          });
+          await api.post("/groups", {
+            user_id: "peer_marcus_dev",
+            name: "Backend Masters & API Architects",
+            description: "Weekly drills on REST APIs, relational SQL schema optimization, and Docker microservices.",
+            skills: ["Python", "FastAPI", "SQL", "Docker"],
+            target_role: "Backend Developer"
+          });
+          const reloaded = await api.get("/groups");
+          groups = reloaded.groups || [];
+        }
+
+        const grid = document.getElementById("groupsGrid");
+        grid.innerHTML = groups.map(g => {
+          const members = g.members || [];
+          const isMember = members.some(m => m.user_id === currentUserId);
+
+          return `
+            <div class="group-circle-card">
+              <div>
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; gap: 8px;">
+                  <h4 style="color: #fff; font-size: 18px; font-weight: 700; letter-spacing:-0.02em;">${g.name}</h4>
+                  <span class="tag tag-medium">${members.length} Member${members.length === 1 ? '' : 's'}</span>
+                </div>
+                <div style="font-size: 12px; color: #a5b4fc; font-weight:600; margin-bottom: 8px;">Track: ${g.target_role || 'All Tracks'}</div>
+                <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 14px;">${g.description}</p>
+                <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px;">
+                  ${(g.skills || []).map(s => `<span class="tag tag-success" style="font-size: 11px;">${s}</span>`).join("")}
+                </div>
+              </div>
+
+              <div>
+                ${isMember ? `
+                  <button class="btn btn-secondary btn-sm" style="width: 100%; border-color: rgba(34,197,94,0.4); color:#86efac;" onclick="leaveGroup('${g.id}')">
+                    Joined ✓ (Leave Circle)
+                  </button>
+                ` : `
+                  <button class="btn btn-primary btn-sm" style="width: 100%;" onclick="joinGroup('${g.id}')">
+                    Join Circle 🤝
+                  </button>
+                `}
+              </div>
+            </div>
+          `;
+        }).join("");
+
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    document.getElementById("createGroupForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const uid = getUserId();
+      const name = document.getElementById("grpName").value.trim();
+      const role = document.getElementById("grpRole").value.trim();
+      const desc = document.getElementById("grpDesc").value.trim();
+      const skills = document.getElementById("grpSkills").value.split(",").map(s => s.trim()).filter(Boolean);
+
+      try {
+        await api.post("/groups", {
+          user_id: uid,
+          name: name,
+          description: desc,
+          skills: skills,
+          target_role: role || "All Roles"
+        });
+        showToast("Group created successfully!", "info");
+        document.getElementById("createGroupForm").reset();
+        await loadGroups();
+      } catch (err) {
+        console.error(err);
+      }
+    });
+
+    async function joinGroup(groupId) {
+      try {
+        await api.post(`/groups/${groupId}/join`, { user_id: getUserId() });
+        showToast("Joined study group!", "info");
+        await loadGroups();
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    async function leaveGroup(groupId) {
+      try {
+        await api.post(`/groups/${groupId}/leave`, { user_id: getUserId() });
+        showToast("Left group.", "info");
+        await loadGroups();
+      } catch (err) {
+        console.error(err);
+      }
+    }
+  </script>
+</body>
+</html>

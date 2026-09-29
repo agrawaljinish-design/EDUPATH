@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login / Mode Select — EduPath</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .login-container {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .login-card {
+      background: #0D1322;
+      border: 1px solid #1E293B;
+      border-radius: 24px;
+      padding: 48px;
+      max-width: 480px;
+      width: 100%;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.06);
+    }
+    .mode-option {
+      border: 2px solid var(--border-card);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      background: rgba(255,255,255,0.01);
+    }
+    .mode-option:hover { border-color: var(--primary); background: var(--primary-subtle); }
+    .mode-option.selected { border-color: var(--primary); background: rgba(124,58,237,0.1); box-shadow: 0 0 20px rgba(124,58,237,0.2); }
+    .mode-option.demo-mode:hover { border-color: var(--color-warning); background: rgba(245,158,11,0.08); }
+    .mode-option.demo-mode.selected { border-color: var(--color-warning); background: rgba(245,158,11,0.08); box-shadow: 0 0 20px rgba(245,158,11,0.2); }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-card">
+      <!-- Logo -->
+      <div style="text-align:center; margin-bottom:36px;">
+        <div style="width:64px; height:64px; border-radius:16px; background:linear-gradient(135deg,#7C3AED,#6366F1); display:inline-flex; align-items:center; justify-content:center; font-size:30px; margin-bottom:16px; box-shadow:0 0 30px rgba(124,58,237,0.4);">🎓</div>
+        <h1 style="font-size:28px; font-weight:900; color:#fff; letter-spacing:-0.03em; margin-bottom:6px;">Welcome to EduPath</h1>
+        <p style="font-size:14px; color:var(--text-secondary);">Adaptive AI Learning Platform · Select your mode to begin</p>
+      </div>
+
+      <!-- Mode Selection -->
+      <div style="display:flex; flex-direction:column; gap:14px; margin-bottom:28px;">
+        <!-- Real Learner Mode -->
+        <div class="mode-option selected" id="optRealLearner" onclick="selectMode('real')">
+          <div style="display:flex; align-items:flex-start; gap:14px;">
+            <div style="width:44px; height:44px; border-radius:10px; background:rgba(34,197,94,0.15); border:1px solid rgba(34,197,94,0.3); display:flex; align-items:center; justify-content:center; font-size:22px; flex-shrink:0;">👤</div>
+            <div>
+              <div style="font-size:16px; font-weight:700; color:#fff; margin-bottom:4px;">Real Learner Mode</div>
+              <div style="font-size:13px; color:var(--text-secondary); line-height:1.5;">Your personalized journey. Upload your resume, set your target role, and let EduPath track your real progress.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Demo Mode -->
+        <div class="mode-option demo-mode" id="optDemo" onclick="selectMode('demo')">
+          <div style="display:flex; align-items:flex-start; gap:14px;">
+            <div style="width:44px; height:44px; border-radius:10px; background:rgba(245,158,11,0.15); border:1px solid rgba(245,158,11,0.3); display:flex; align-items:center; justify-content:center; font-size:22px; flex-shrink:0;">⚡</div>
+            <div>
+              <div style="font-size:16px; font-weight:700; color:#fff; margin-bottom:4px;">Demo Mode — Alex Demo</div>
+              <div style="font-size:13px; color:var(--text-secondary); line-height:1.5;">Experience the full adaptive loop instantly. Alex struggles with SQL JOINs and the AI automatically restructures the roadmap.</div>
+              <div class="badge badge-warning" style="margin-top:8px;">Pre-loaded scenario</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Real Mode: Name Input -->
+      <div id="realModeFields">
+        <div class="form-group">
+          <label class="form-label">Your Name</label>
+          <input type="text" id="inputName" class="form-input" placeholder="e.g. Sarah K." value="">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Target Role</label>
+          <select id="inputRole" class="form-select">
+            <option value="AI/ML Engineer">AI/ML Engineer</option>
+            <option value="Full Stack Developer">Full Stack Developer</option>
+            <option value="Data Engineer">Data Engineer</option>
+            <option value="Backend Developer">Backend Developer</option>
+            <option value="DevOps Engineer">DevOps Engineer</option>
+            <option value="Data Scientist">Data Scientist</option>
+            <option value="Mobile Developer">Mobile Developer</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Action Button -->
+      <button class="btn btn-primary" id="btnLaunch" style="width:100%; padding:14px; font-size:15px; font-weight:700;" onclick="launch()">
+        Start Learning →
+      </button>
+
+      <div style="text-align:center; margin-top:16px;">
+        <a href="index.html" style="font-size:12px; color:var(--text-muted);">← Back to Home</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    let selectedMode = "real";
+
+    function selectMode(mode) {
+      selectedMode = mode;
+      document.getElementById("optRealLearner").classList.toggle("selected", mode === "real");
+      document.getElementById("optDemo").classList.toggle("selected", mode === "demo");
+      document.getElementById("realModeFields").style.display = mode === "real" ? "block" : "none";
+      document.getElementById("btnLaunch").innerText = mode === "real" ? "Start Learning →" : "Launch Demo (Alex Demo) ⚡";
+    }
+
+    async function launch() {
+      const btn = document.getElementById("btnLaunch");
+      btn.disabled = true;
+      btn.innerText = "Loading...";
+
+      if (selectedMode === "demo") {
+        try {
+          setDemoMode();
+          showToast("Seeding Alex Demo environment...", "info");
+          await api.post("/demo/load");
+          window.location.href = "dashboard.html";
+        } catch(e) { window.location.href = "dashboard.html"; }
+      } else {
+        const name = document.getElementById("inputName").value.trim() || "Learner";
+        const role = document.getElementById("inputRole").value;
+        try {
+          // Generate a UID from name
+          const uid = name.toLowerCase().replace(/\s+/g, "_") + "_" + Date.now().toString(36);
+          setRealMode(uid);
+          await api.post("/profile", {
+            user_id: uid,
+            name: name,
+            target_role: role,
+            current_skills: [],
+            education: "Undergraduate Degree",
+            experience: "Student"
+          });
+          window.location.href = "dashboard.html";
+        } catch(e) { window.location.href = "dashboard.html"; }
+      }
+    }
+
+    // Select real mode by default
+    selectMode("real");
+  </script>
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Friends & Study Buddies — EduPath</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo-icon">🎓</div>
+        <div>
+          <div class="sidebar-logo-text">EduPath</div>
+          <span class="sidebar-badge">Adaptive AI</span>
+        </div>
+      </div>
+      <div class="nav-section-title">Personalized Learning</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="dashboard.html"><span class="nav-icon">📊</span> Dashboard</a></li>
+        <li class="nav-item"><a href="profile.html"><span class="nav-icon">👤</span> Learner Profile</a></li>
+        <li class="nav-item"><a href="resume.html"><span class="nav-icon">📄</span> Resume Upload</a></li>
+        <li class="nav-item"><a href="skills.html"><span class="nav-icon">🎯</span> Skill Gaps</a></li>
+        <li class="nav-item"><a href="roadmap.html"><span class="nav-icon">🗺️</span> Roadmap Timeline</a></li>
+        <li class="nav-item"><a href="plan.html"><span class="nav-icon">📅</span> Today's Plan</a></li>
+        <li class="nav-item"><a href="assessment.html"><span class="nav-icon">📝</span> Assessments</a></li>
+        <li class="nav-item"><a href="revision.html"><span class="nav-icon">🔄</span> Revision Queue</a></li>
+        <li class="nav-item"><a href="projects.html"><span class="nav-icon">🚀</span> Projects</a></li>
+        <li class="nav-item"><a href="chat.html"><span class="nav-icon">💬</span> AI Companion</a></li>
+      </ul>
+      <div class="nav-section-title">Peer Collaboration</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="peers.html"><span class="nav-icon">👥</span> Peer Discovery</a></li>
+        <li class="nav-item active"><a href="friends.html"><span class="nav-icon">🤝</span> Friends</a></li>
+        <li class="nav-item"><a href="doubts.html"><span class="nav-icon">❓</span> Doubt Forum</a></li>
+        <li class="nav-item"><a href="groups.html"><span class="nav-icon">🏢</span> Study Groups</a></li>
+        <li class="nav-item"><a href="community.html"><span class="nav-icon">🌐</span> Community Feed</a></li>
+      </ul>
+      <div class="nav-section-title">Competitive Learning</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="challenges.html"><span class="nav-icon">⚡</span> Challenges</a></li>
+        <li class="nav-item"><a href="leaderboard.html"><span class="nav-icon">🏆</span> Leaderboard</a></li>
+        <li class="nav-item"><a href="badges.html"><span class="nav-icon">🎖️</span> Badges</a></li>
+        <li class="nav-item"><a href="progress.html"><span class="nav-icon">📈</span> Analytics</a></li>
+        <li class="nav-item"><a href="reports.html"><span class="nav-icon">📑</span> Weekly Reports</a></li>
+      </ul>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <div class="topbar-search-box">
+            <input type="text" class="topbar-search-input" placeholder="Search friends... (Press /)">
+            <span class="topbar-search-key">/</span>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <div id="topbarStreak" class="metric-pill streak">🔥 1d</div>
+          <div id="topbarXP" class="metric-pill xp">⭐ 0 XP</div>
+          <div id="modeIndicator" class="mode-badge real">👤 Real Learner</div>
+          <button id="btnImStuck" class="btn-stuck">🚨 I'm Stuck</button>
+          <a href="profile.html" class="user-avatar-pill">
+            <div id="topbarAvatarText" class="user-avatar-circle">L</div>
+            <span id="topbarUserName" style="font-size:13px;font-weight:600;color:#fff;">Learner</span>
+          </a>
+          <a href="login.html" class="btn btn-secondary btn-sm">Switch</a>
+        </div>
+      </header>
+
+      <div class="page-body">
+        <div style="margin-bottom: 24px;">
+          <h1 style="font-size:28px; font-weight:900; color:#fff; letter-spacing:-0.03em; margin-bottom:6px;">🤝 Friends & Study Buddies</h1>
+          <p style="color:var(--text-secondary); font-size:14px;">Connect with peers learning complementary topics, share study accountability, and benchmark mutual progress.</p>
+        </div>
+
+        <!-- Pending Friend Requests -->
+        <div class="card" style="margin-bottom: 28px;">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">📩 Pending Incoming Requests</h3>
+              <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Learners requesting peer collaboration</p>
+            </div>
+          </div>
+          <div id="pendingRequestsContainer" style="display: flex; flex-direction: column; gap: 12px;">
+            <p style='color: var(--text-muted); font-size: 13px;'>Checking incoming requests...</p>
+          </div>
+        </div>
+
+        <!-- Mutual Friends List -->
+        <div class="card">
+          <div class="card-header" style="flex-wrap: wrap; gap: 12px;">
+            <div>
+              <h3 class="card-title">👥 Connected Study Circle</h3>
+              <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">
+                Your mutual network of study buddies and accountability partners.
+              </p>
+            </div>
+            <a href="peers.html" class="btn btn-primary btn-sm">+ Find New Peers 🔍</a>
+          </div>
+
+          <div style="overflow-x: auto;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Friend</th>
+                  <th>Target Career</th>
+                  <th>Streak</th>
+                  <th style="text-align:right;">Status</th>
+                </tr>
+              </thead>
+              <tbody id="friendsTableBody">
+                <!-- Dynamic rows -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Stuck Modal -->
+  <div id="stuckModal" class="modal-overlay">
+    <div class="modal-card">
+      <button id="stuckModalClose" class="modal-close">✕</button>
+      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+        <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(239, 68, 68, 0.2); display: flex; align-items: center; justify-content: center; font-size: 20px;">🚨</div>
+        <div>
+          <h3 style="font-family: var(--font-heading); font-size: 20px; font-weight: 700; color: #fff;">Need Help? Let's Adapt Your Path</h3>
+          <p style="font-size: 13px; color: var(--text-muted);">EduPath will adaptively insert targeted reinforcement.</p>
+        </div>
+      </div>
+      <form id="stuckForm">
+        <div class="form-group">
+          <label class="form-label">Which skill or concept is blocking you?</label>
+          <input type="text" id="stuckSkillInput" class="form-input" placeholder="e.g. SQL & Data Querying, NumPy, Python" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Specific topic or obstacle (Optional)</label>
+          <input type="text" id="stuckTopicInput" class="form-input" placeholder="e.g. Multi-table JOINs, broadcasting">
+        </div>
+        <button type="button" id="stuckFormSubmit" class="btn btn-primary" style="width: 100%;">Trigger Adaptive Replanning ⚡</button>
+      </form>
+      <div id="stuckInterventionResult" style="display: none;"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      await loadFriends();
+    });
+
+    async function loadFriends() {
+      const uid = getUserId();
+      try {
+        const res = await api.get(`/friends/${uid}`);
+        const friends = res.friends || [];
+        const pending = res.pending_requests || [];
+
+        const reqContainer = document.getElementById("pendingRequestsContainer");
+        if (pending.length === 0) {
+          reqContainer.innerHTML = "<p style='color: var(--text-muted); font-size: 13px; padding: 10px 0;'>No pending friend requests.</p>";
+        } else {
+          reqContainer.innerHTML = pending.map(r => `
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; background: rgba(255,255,255,0.02); border: 1px solid var(--border-subtle); border-radius: 10px; gap: 12px; flex-wrap: wrap;">
+              <div style="display: flex; align-items: center; gap: 12px;">
+                <div style="width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, var(--primary), var(--secondary)); display: flex; align-items: center; justify-content: center; font-weight: 700; color: #fff;">
+                  ${(r.from_name || "L").charAt(0).toUpperCase()}
+                </div>
+                <div>
+                  <strong style="color: #fff; font-size: 14px;">${r.from_name}</strong>
+                  <div style="font-size: 12px; color: var(--text-secondary); margin-top: 2px;">wants to connect as a study buddy</div>
+                </div>
+              </div>
+              <button class="btn btn-primary btn-sm" onclick="acceptRequest('${r.id}')">Accept Request ✓</button>
+            </div>
+          `).join("");
+        }
+
+        const tbody = document.getElementById("friendsTableBody");
+        if (friends.length === 0) {
+          tbody.innerHTML = "<tr><td colspan='4' style='color: var(--text-muted); text-align: center; padding: 24px;'>You haven't added any study friends yet. Click 'Find New Peers' to discover learners!</td></tr>";
+        } else {
+          tbody.innerHTML = friends.map(f => `
+            <tr>
+              <td>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #fff;">
+                    ${(f.friend_name || "U").charAt(0).toUpperCase()}
+                  </div>
+                  <strong style="color: #fff;">${f.friend_name}</strong>
+                </div>
+              </td>
+              <td>${f.friend_role || 'Developer'}</td>
+              <td><span style="color: #f59e0b; font-weight: 700;">🔥 ${f.friend_streak || 1}d</span></td>
+              <td style="text-align:right;"><span class="tag tag-success">Connected</span></td>
+            </tr>
+          `).join("");
+        }
+
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    async function acceptRequest(reqId) {
+      const uid = getUserId();
+      try {
+        await api.post("/friends/accept", {
+          request_id: reqId,
+          user_id: uid
+        });
+        showToast("Friend request accepted! Added to your network.", "info");
+        await loadFriends();
+      } catch (err) {
+        console.error(err);
+      }
+    }
+  </script>
+</body>
+</html>

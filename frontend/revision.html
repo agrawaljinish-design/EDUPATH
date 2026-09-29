@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spaced Repetition & Flashcards — EduPath</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .flashcard-wrap {
+      perspective: 1000px;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .flashcard {
+      background: linear-gradient(135deg, rgba(30, 27, 75, 0.75), rgba(17, 24, 39, 0.95));
+      border: 1px solid var(--border-glow);
+      border-radius: var(--radius-lg);
+      padding: 44px 28px;
+      min-height: 240px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      margin-bottom: 20px;
+      position: relative;
+    }
+    .flashcard:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(124, 58, 237, 0.25);
+      border-color: rgba(124, 58, 237, 0.5);
+    }
+    .flashcard-pill {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #c4b5fd;
+      background: rgba(124, 58, 237, 0.2);
+      padding: 4px 12px;
+      border-radius: 9999px;
+      margin-bottom: 16px;
+    }
+    .flashcard-content {
+      font-size: 18px;
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.6;
+      max-width: 580px;
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo-icon">🎓</div>
+        <div>
+          <div class="sidebar-logo-text">EduPath</div>
+          <span class="sidebar-badge">Adaptive AI</span>
+        </div>
+      </div>
+      <div class="nav-section-title">Personalized Learning</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="dashboard.html"><span class="nav-icon">📊</span> Dashboard</a></li>
+        <li class="nav-item"><a href="profile.html"><span class="nav-icon">👤</span> Learner Profile</a></li>
+        <li class="nav-item"><a href="resume.html"><span class="nav-icon">📄</span> Resume Upload</a></li>
+        <li class="nav-item"><a href="skills.html"><span class="nav-icon">🎯</span> Skill Gaps</a></li>
+        <li class="nav-item"><a href="roadmap.html"><span class="nav-icon">🗺️</span> Roadmap Timeline</a></li>
+        <li class="nav-item"><a href="plan.html"><span class="nav-icon">📅</span> Today's Plan</a></li>
+        <li class="nav-item"><a href="assessment.html"><span class="nav-icon">📝</span> Assessments</a></li>
+        <li class="nav-item active"><a href="revision.html"><span class="nav-icon">🔄</span> Revision Queue</a></li>
+        <li class="nav-item"><a href="projects.html"><span class="nav-icon">🚀</span> Projects</a></li>
+        <li class="nav-item"><a href="chat.html"><span class="nav-icon">💬</span> AI Companion</a></li>
+      </ul>
+      <div class="nav-section-title">Peer Collaboration</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="peers.html"><span class="nav-icon">👥</span> Peer Discovery</a></li>
+        <li class="nav-item"><a href="friends.html"><span class="nav-icon">🤝</span> Friends</a></li>
+        <li class="nav-item"><a href="doubts.html"><span class="nav-icon">❓</span> Doubt Forum</a></li>
+        <li class="nav-item"><a href="groups.html"><span class="nav-icon">🏢</span> Study Groups</a></li>
+        <li class="nav-item"><a href="community.html"><span class="nav-icon">🌐</span> Community Feed</a></li>
+      </ul>
+      <div class="nav-section-title">Competitive Learning</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="challenges.html"><span class="nav-icon">⚡</span> Challenges</a></li>
+        <li class="nav-item"><a href="leaderboard.html"><span class="nav-icon">🏆</span> Leaderboard</a></li>
+        <li class="nav-item"><a href="badges.html"><span class="nav-icon">🎖️</span> Badges</a></li>
+        <li class="nav-item"><a href="progress.html"><span class="nav-icon">📈</span> Analytics</a></li>
+        <li class="nav-item"><a href="reports.html"><span class="nav-icon">📑</span> Weekly Reports</a></li>
+      </ul>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <div class="topbar-search-box">
+            <input type="text" class="topbar-search-input" placeholder="Search flashcards... (Press /)">
+            <span class="topbar-search-key">/</span>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <div id="topbarStreak" class="metric-pill streak">🔥 1d</div>
+          <div id="topbarXP" class="metric-pill xp">⭐ 0 XP</div>
+          <div id="modeIndicator" class="mode-badge real">👤 Real Learner</div>
+          <button id="btnImStuck" class="btn-stuck">🚨 I'm Stuck</button>
+          <a href="profile.html" class="user-avatar-pill">
+            <div id="topbarAvatarText" class="user-avatar-circle">L</div>
+            <span id="topbarUserName" style="font-size:13px;font-weight:600;color:#fff;">Learner</span>
+          </a>
+          <a href="login.html" class="btn btn-secondary btn-sm">Switch</a>
+        </div>
+      </header>
+
+      <div class="page-body">
+        <div style="margin-bottom: 24px;">
+          <h1 style="font-size:28px; font-weight:900; color:#fff; letter-spacing:-0.03em; margin-bottom:6px;">🔄 Spaced Repetition & Revision</h1>
+          <p style="color:var(--text-secondary); font-size:14px;">Reinforce retention using scientifically optimized SM-2 spaced intervals so concepts move into permanent memory.</p>
+        </div>
+
+        <!-- Active Review Card -->
+        <div class="card" style="margin-bottom: 28px;">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">🎴 Active Flashcard Deck</h3>
+              <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">
+                Click card to flip between Question and Answer. Rate your recall to recalibrate next review date.
+              </p>
+            </div>
+            <span class="tag tag-medium" id="cardDeckStatus">Loading cards...</span>
+          </div>
+
+          <div class="flashcard-wrap">
+            <div id="currentFlashcard" class="flashcard" onclick="flipCard()">
+              <div id="cardSideLabel" class="flashcard-pill">Question — Click to reveal</div>
+              <div id="cardText" class="flashcard-content">Select a card below to begin review</div>
+            </div>
+
+            <!-- Grade buttons -->
+            <div id="gradeButtonsRow" style="display: none; justify-content: center; gap: 12px; margin-top: 20px; flex-wrap: wrap;">
+              <button class="btn btn-secondary" onclick="rateReview(30)" style="border-color: rgba(239,68,68,0.4); color:#fca5a5;">
+                Forgot (30%)
+              </button>
+              <button class="btn btn-secondary" onclick="rateReview(60)" style="border-color: rgba(245,158,11,0.4); color:#fcd34d;">
+                A Bit Rusty (60%)
+              </button>
+              <button class="btn btn-primary" onclick="rateReview(100)" style="background: linear-gradient(135deg, #10B981, #059669); border-color:#10B981;">
+                Mastered! (100%) ✓
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pending Revision Queue Table -->
+        <div class="card">
+          <div class="card-header" style="flex-wrap: wrap; gap: 12px;">
+            <div>
+              <h3 class="card-title">📚 Topics in Spaced Repetition Queue</h3>
+              <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Intervals adapt based on your recall accuracy score</p>
+            </div>
+            <button class="btn btn-secondary btn-sm" onclick="addNewTopicPrompt()">+ Add Topic Deck</button>
+          </div>
+
+          <div style="overflow-x: auto;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Skill</th>
+                  <th>Topic</th>
+                  <th>Status</th>
+                  <th>Interval</th>
+                  <th style="text-align:right;">Action</th>
+                </tr>
+              </thead>
+              <tbody id="revisionQueueTableBody">
+                <!-- Dynamic rows -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Stuck Modal -->
+  <div id="stuckModal" class="modal-overlay">
+    <div class="modal-card">
+      <button id="stuckModalClose" class="modal-close">✕</button>
+      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+        <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(239, 68, 68, 0.2); display: flex; align-items: center; justify-content: center; font-size: 20px;">🚨</div>
+        <div>
+          <h3 style="font-family: var(--font-heading); font-size: 20px; font-weight: 700; color: #fff;">Need Help? Let's Adapt Your Path</h3>
+          <p style="font-size: 13px; color: var(--text-muted);">EduPath will adaptively insert targeted reinforcement.</p>
+        </div>
+      </div>
+      <form id="stuckForm">
+        <div class="form-group">
+          <label class="form-label">Which skill or concept is blocking you?</label>
+          <input type="text" id="stuckSkillInput" class="form-input" placeholder="e.g. SQL & Data Querying, NumPy, Python" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Specific topic or obstacle (Optional)</label>
+          <input type="text" id="stuckTopicInput" class="form-input" placeholder="e.g. Multi-table JOINs, broadcasting">
+        </div>
+        <button type="button" id="stuckFormSubmit" class="btn btn-primary" style="width: 100%;">Trigger Adaptive Replanning ⚡</button>
+      </form>
+      <div id="stuckInterventionResult" style="display: none;"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    let activeQueue = [];
+    let currentCardIndex = 0;
+    let currentCards = [];
+    let isFlipped = false;
+    let currentQueueItemId = null;
+
+    document.addEventListener("DOMContentLoaded", async () => {
+      await loadRevisions();
+    });
+
+    async function loadRevisions() {
+      const uid = getUserId();
+      try {
+        const res = await api.get(`/revision/${uid}`);
+        activeQueue = res.revisions || [];
+        const tableBody = document.getElementById("revisionQueueTableBody");
+
+        if (activeQueue.length === 0) {
+          tableBody.innerHTML = "<tr><td colspan='5' style='color: var(--text-muted); text-align: center; padding: 24px;'>No topics due for revision! Great job keeping up with spaced practice.</td></tr>";
+          document.getElementById("cardDeckStatus").innerText = "Queue Up-to-date";
+        } else {
+          document.getElementById("cardDeckStatus").innerText = `${activeQueue.length} Active Items`;
+          tableBody.innerHTML = activeQueue.map((item, idx) => `
+            <tr>
+              <td><strong style="color:#fff;">${item.skill}</strong></td>
+              <td>${item.topic}</td>
+              <td><span class="tag tag-${item.due ? 'critical' : 'success'}">${item.due ? 'Due Now' : 'Scheduled'}</span></td>
+              <td>${item.interval_days || 1} day(s)</td>
+              <td style="text-align:right;">
+                <button class="btn btn-secondary btn-sm" onclick="startCardDeck(${idx})">Review Cards 🎴</button>
+              </td>
+            </tr>
+          `).join("");
+
+          startCardDeck(0);
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    function startCardDeck(idx) {
+      if (!activeQueue[idx]) return;
+      const item = activeQueue[idx];
+      currentQueueItemId = item.id;
+      currentCards = item.flashcards || [
+        { front: `Core concept of ${item.topic} in ${item.skill}?`, back: `Understanding the primary syntax and pattern application for ${item.topic}.` }
+      ];
+      currentCardIndex = 0;
+      isFlipped = false;
+      renderCard();
+      document.getElementById("currentFlashcard").scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+
+    function renderCard() {
+      if (currentCardIndex >= currentCards.length) {
+        document.getElementById("cardSideLabel").innerText = "Deck Completed!";
+        document.getElementById("cardText").innerText = "🎉 Fantastic work! You reviewed all cards in this topic.";
+        document.getElementById("gradeButtonsRow").style.display = "none";
+        return;
+      }
+
+      const card = currentCards[currentCardIndex];
+      isFlipped = false;
+      document.getElementById("cardSideLabel").innerText = `Card ${currentCardIndex + 1} of ${currentCards.length} — Question (Click to flip)`;
+      document.getElementById("cardText").innerText = card.front;
+      document.getElementById("gradeButtonsRow").style.display = "none";
+    }
+
+    function flipCard() {
+      if (currentCardIndex >= currentCards.length) return;
+      isFlipped = !isFlipped;
+      const card = currentCards[currentCardIndex];
+      if (isFlipped) {
+        document.getElementById("cardSideLabel").innerText = `Card ${currentCardIndex + 1} of ${currentCards.length} — Answer / Explanation`;
+        document.getElementById("cardText").innerText = card.back;
+        document.getElementById("gradeButtonsRow").style.display = "flex";
+      } else {
+        document.getElementById("cardSideLabel").innerText = `Card ${currentCardIndex + 1} of ${currentCards.length} — Question (Click to flip)`;
+        document.getElementById("cardText").innerText = card.front;
+        document.getElementById("gradeButtonsRow").style.display = "none";
+      }
+    }
+
+    async function rateReview(score) {
+      const uid = getUserId();
+      try {
+        if (currentQueueItemId) {
+          await api.post("/revision/review", {
+            user_id: uid,
+            item_id: currentQueueItemId,
+            score: score
+          });
+          showToast(`Flashcard scored (${score}%)! +20 XP awarded`, "info");
+        }
+      } catch (e) {}
+
+      currentCardIndex++;
+      renderCard();
+    }
+
+    async function addNewTopicPrompt() {
+      const skill = prompt("Enter skill name (e.g. Python, SQL):");
+      if (!skill) return;
+      const topic = prompt("Enter specific topic to revise (e.g. Generators, Outer Joins):");
+      if (!topic) return;
+
+      try {
+        await api.post("/revision/generate", {
+          user_id: getUserId(),
+          skill: skill,
+          topic: topic
+        });
+        showToast("New revision deck added to queue!", "info");
+        await loadRevisions();
+      } catch (e) {}
+    }
+  </script>
+</body>
+</html>

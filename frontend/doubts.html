@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doubt Forum — EduPath</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .doubt-card {
+      padding: 20px; background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border-subtle); border-radius: 12px;
+      transition: all 0.2s ease; cursor: pointer;
+    }
+    .doubt-card:hover { border-color: rgba(124,58,237,0.4); transform: translateY(-2px); }
+    .doubt-card.best-answer-marked { border-color: rgba(252,211,77,0.4); background: rgba(252,211,77,0.03); }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo-icon">🎓</div>
+        <div><div class="sidebar-logo-text">EduPath</div><span class="sidebar-badge">Adaptive AI</span></div>
+      </div>
+      <div class="nav-section-title">Personalized Learning</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="dashboard.html"><span class="nav-icon">📊</span> Dashboard</a></li>
+        <li class="nav-item"><a href="profile.html"><span class="nav-icon">👤</span> Learner Profile</a></li>
+        <li class="nav-item"><a href="resume.html"><span class="nav-icon">📄</span> Resume Upload</a></li>
+        <li class="nav-item"><a href="skills.html"><span class="nav-icon">🎯</span> Skill Gaps</a></li>
+        <li class="nav-item"><a href="roadmap.html"><span class="nav-icon">🗺️</span> Roadmap Timeline</a></li>
+        <li class="nav-item"><a href="plan.html"><span class="nav-icon">📅</span> Today's Plan</a></li>
+        <li class="nav-item"><a href="assessment.html"><span class="nav-icon">📝</span> Assessments</a></li>
+        <li class="nav-item"><a href="revision.html"><span class="nav-icon">🔄</span> Revision Queue</a></li>
+        <li class="nav-item"><a href="projects.html"><span class="nav-icon">🚀</span> Projects</a></li>
+        <li class="nav-item"><a href="chat.html"><span class="nav-icon">💬</span> AI Companion</a></li>
+      </ul>
+      <div class="nav-section-title">Peer Collaboration</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="peers.html"><span class="nav-icon">👥</span> Peer Discovery</a></li>
+        <li class="nav-item"><a href="friends.html"><span class="nav-icon">🤝</span> Friends</a></li>
+        <li class="nav-item active"><a href="doubts.html"><span class="nav-icon">❓</span> Doubt Forum</a></li>
+        <li class="nav-item"><a href="groups.html"><span class="nav-icon">🏢</span> Study Groups</a></li>
+        <li class="nav-item"><a href="community.html"><span class="nav-icon">🌐</span> Community Feed</a></li>
+      </ul>
+      <div class="nav-section-title">Competitive Learning</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="challenges.html"><span class="nav-icon">⚡</span> Challenges</a></li>
+        <li class="nav-item"><a href="leaderboard.html"><span class="nav-icon">🏆</span> Leaderboard</a></li>
+        <li class="nav-item"><a href="badges.html"><span class="nav-icon">🎖️</span> Badges</a></li>
+        <li class="nav-item"><a href="progress.html"><span class="nav-icon">📈</span> Analytics</a></li>
+        <li class="nav-item"><a href="reports.html"><span class="nav-icon">📑</span> Weekly Reports</a></li>
+      </ul>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <div class="topbar-search-box">
+            <input type="text" class="topbar-search-input" placeholder="Search doubts... (Press /)">
+            <span class="topbar-search-key">/</span>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <div id="topbarStreak" class="metric-pill streak">🔥 1d</div>
+          <div id="topbarXP" class="metric-pill xp">⭐ 0 XP</div>
+          <div id="modeIndicator" class="mode-badge real">👤 Real Learner</div>
+          <button id="btnImStuck" class="btn-stuck">🚨 I'm Stuck</button>
+          <a href="profile.html" class="user-avatar-pill">
+            <div id="topbarAvatarText" class="user-avatar-circle">L</div>
+            <span id="topbarUserName" style="font-size:13px;font-weight:600;color:#fff;">Learner</span>
+          </a>
+          <a href="login.html" class="btn btn-secondary btn-sm">Switch</a>
+        </div>
+      </header>
+
+      <div class="page-body">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px; margin-bottom:28px;">
+          <div>
+            <h1 style="font-size:28px; font-weight:900; color:#fff; letter-spacing:-0.03em; margin-bottom:6px;">❓ Doubt Forum</h1>
+            <p style="color:var(--text-secondary); font-size:14px;">Ask questions, share what you know, and help each other overcome blockers.</p>
+          </div>
+          <button class="btn btn-primary" onclick="showAskForm()">+ Ask a Question</button>
+        </div>
+
+        <!-- Ask a Question Form (hidden by default) -->
+        <div class="card" id="askForm" style="display:none; margin-bottom:24px;">
+          <div class="card-header">
+            <h3 class="card-title">🖊️ Post a New Question</h3>
+            <button class="btn btn-ghost btn-sm" onclick="hideAskForm()">Cancel</button>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Question Title</label>
+            <input type="text" id="doubtTitle" class="form-input" placeholder="e.g. Why do SQL LEFT JOINs sometimes return NULL values?">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Details / Context</label>
+            <textarea id="doubtBody" class="form-input form-textarea" rows="3" placeholder="Describe what you've tried and what's confusing you..."></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Skill / Topic Tag</label>
+            <input type="text" id="doubtSkill" class="form-input" placeholder="e.g. SQL, NumPy, Recursion">
+          </div>
+          <button class="btn btn-primary" onclick="postDoubt()">Submit Question →</button>
+        </div>
+
+        <!-- Doubts List -->
+        <div style="display:flex; flex-direction:column; gap:14px;" id="doubtsList">
+          <div style="text-align:center; padding:40px; color:var(--text-muted);">Loading doubt forum...</div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div id="stuckModal" class="modal-overlay">
+    <div class="modal-card">
+      <button id="stuckModalClose" class="modal-close">✕</button>
+      <h3 style="font-size:20px; font-weight:800; color:#fff; margin-bottom:6px;">🚨 Need Help?</h3>
+      <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px;">
+        <button type="button" class="stuck-reason-chip selected" data-reason="I don't understand the concept">I don't understand the concept</button>
+        <button type="button" class="stuck-reason-chip" data-reason="I'm getting wrong answers">I'm getting wrong answers</button>
+        <button type="button" class="stuck-reason-chip" data-reason="The exercises are too difficult">Exercises too difficult</button>
+        <button type="button" class="stuck-reason-chip" data-reason="Something else...">Something else...</button>
+      </div>
+      <input type="hidden" id="stuckReasonChoice" value="I don't understand the concept">
+      <div class="form-group"><label class="form-label">Blocking skill</label><input type="text" id="stuckSkillInput" class="form-input" placeholder="e.g. SQL & Data Querying"></div>
+      <div class="form-group"><label class="form-label">Specific topic</label><input type="text" id="stuckTopicInput" class="form-input" placeholder="e.g. Multi-table JOINs"></div>
+      <button id="stuckFormSubmit" class="btn btn-primary" style="width:100%;">Trigger Adaptive Replanning ⚡</button>
+      <div id="stuckInterventionResult" style="display:none; margin-top:20px;"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    let uid;
+    document.addEventListener("DOMContentLoaded", async () => {
+      uid = getUserId();
+      await loadDoubts();
+    });
+
+    function showAskForm() { document.getElementById("askForm").style.display = "block"; }
+    function hideAskForm() { document.getElementById("askForm").style.display = "none"; }
+
+    async function loadDoubts() {
+      try {
+        const data = await api.get("/doubts");
+        const doubts = data.doubts || [];
+        const list = document.getElementById("doubtsList");
+        if (doubts.length === 0) {
+          list.innerHTML = "<div style='text-align:center; padding:60px; color:var(--text-muted);'>No questions yet. Be the first to ask!</div>";
+          return;
+        }
+        const withAnswers = await Promise.all(doubts.map(async (d) => {
+          try {
+            const ansData = await api.get(`/doubts/${d.id}/answers`);
+            return { ...d, answers: ansData.answers || [] };
+          } catch (err) {
+            return { ...d, answers: [] };
+          }
+        }));
+        list.innerHTML = withAnswers.map(d => {
+          const answers = d.answers || [];
+          const hasBest = answers.some(a => a.is_best) || !!d.best_answer_id;
+          const ansCount = answers.length || d.answers_count || 0;
+          const isAuthor = d.user_id === uid;
+          const safeTitle = (d.title || "").replace(/'/g, "\\'");
+          return `
+          <div class="doubt-card ${hasBest ? 'best-answer-marked' : ''}">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:14px; flex-wrap:wrap;">
+              <div style="flex:1; min-width:0;">
+                <div style="display:flex; align-items:center; gap:8px; margin-bottom:8px; flex-wrap:wrap;">
+                  ${d.skill ? `<span class="badge badge-info">${d.skill}</span>` : ''}
+                  ${hasBest ? '<span class="badge badge-success">✓ Resolved</span>' : '<span class="badge badge-warning">Open</span>'}
+                  ${hasBest ? '<span style="font-size:12px; color:#FCD34D; font-weight:700;">⭐ Best Answer Marked</span>' : ''}
+                </div>
+                <h3 style="font-size:16px; font-weight:700; color:#fff; margin-bottom:6px;">${d.title || ""}</h3>
+                ${d.description ? `<p style="font-size:13px; color:var(--text-secondary); line-height:1.5; margin-bottom:10px;">${d.description}</p>` : ''}
+                <div style="font-size:12px; color:var(--text-muted);">Asked by <span style="color:#C4B5FD;">${d.author_name || "Learner"}</span> • ${d.created_at ? new Date(d.created_at).toLocaleDateString() : "Recently"}</div>
+              </div>
+              <div style="display:flex; flex-direction:column; align-items:center; gap:4px; flex-shrink:0; min-width:60px; text-align:center;">
+                <div style="font-size:22px; font-weight:800; color:${ansCount > 0 ? 'var(--color-success)' : 'var(--text-muted)'};">${ansCount}</div>
+                <div style="font-size:11px; color:var(--text-muted);">answers</div>
+              </div>
+            </div>
+            ${answers.length > 0 ? `
+            <div style="margin-top:14px; padding-top:14px; border-top:1px solid var(--border-subtle); display:flex; flex-direction:column; gap:10px;">
+              ${answers.map(a => `
+              <div style="padding:12px; background:${a.is_best ? 'rgba(252,211,77,0.06)' : 'rgba(255,255,255,0.02)'}; border:1px solid ${a.is_best ? 'rgba(252,211,77,0.35)' : 'var(--border-subtle)'}; border-radius:10px;">
+                ${a.is_best ? '<div style="font-size:11px; font-weight:700; color:#FCD34D; margin-bottom:4px;">⭐ BEST ANSWER</div>' : ''}
+                <p style="font-size:13px; color:var(--text-secondary); line-height:1.5; margin-bottom:6px;">${a.content || ""}</p>
+                <div style="display:flex; align-items:center; gap:8px; font-size:12px; color:var(--text-muted); flex-wrap:wrap;">
+                  <span>By <span style="color:#fff;">${a.author_name || "Peer"}</span></span>
+                  <span>•</span>
+                  <button class="btn btn-ghost btn-sm" style="padding:2px 6px; font-size:11px;" onclick="helpfulVote('${a.id}')">👍 ${a.helpful_votes || 0} helpful</button>
+                  ${isAuthor && !a.is_best && a.user_id !== uid ? `<button class="btn btn-secondary btn-sm" style="padding:2px 8px; font-size:11px;" onclick="markBestAnswer('${d.id}', '${a.id}')">Mark Best Answer</button>` : ''}
+                </div>
+              </div>`).join("")}
+            </div>` : ''}
+            <div style="margin-top:12px; display:flex; gap:8px;">
+              <button class="btn btn-secondary btn-sm" onclick="expandDoubt('${d.id}', '${safeTitle}')">Reply ↩</button>
+            </div>
+          </div>`;
+        }).join("");
+      } catch(e) {
+        document.getElementById("doubtsList").innerHTML = "<div style='text-align:center; padding:40px; color:var(--text-muted);'>Could not load doubts. Check backend connection.</div>";
+      }
+    }
+
+    async function postDoubt() {
+      const title = document.getElementById("doubtTitle").value.trim();
+      const description = document.getElementById("doubtBody").value.trim();
+      const skill = document.getElementById("doubtSkill").value.trim();
+      if (!title) { showToast("Please enter a question title", "error"); return; }
+      if (!description) { showToast("Please add question details.", "error"); return; }
+      if (!skill) { showToast("Please add a skill or topic tag.", "error"); return; }
+      try {
+        await api.post("/doubts", {
+          user_id: uid,
+          title,
+          description,
+          skill,
+          topic: skill
+        });
+        showToast("Question posted! Peers will be notified.", "info");
+        hideAskForm();
+        document.getElementById("doubtTitle").value = "";
+        document.getElementById("doubtBody").value = "";
+        document.getElementById("doubtSkill").value = "";
+        await loadDoubts();
+      } catch(e) {
+        showToast(e.message || "Failed to post question", "error");
+      }
+    }
+
+    async function helpfulVote(answerId) {
+      try {
+        await api.post(`/answers/${answerId}/helpful`, { user_id: uid });
+        showToast("Marked as helpful!", "info");
+        await loadDoubts();
+      } catch(e) {
+        showToast(e.message || "Could not record helpful vote.", "error");
+      }
+    }
+
+    async function markBestAnswer(doubtId, answerId) {
+      try {
+        await api.post(`/answers/${answerId}/best`, { user_id: uid, doubt_id: doubtId });
+        showToast("Best answer marked.", "info");
+        await loadDoubts();
+      } catch(e) {
+        showToast(e.message || "Could not mark best answer.", "error");
+      }
+    }
+
+    function expandDoubt(doubtId, title) {
+      const answer = prompt(`Reply to: "${title}"\n\nType your answer:`);
+      if (!answer) return;
+      api.post(`/doubts/${doubtId}/answers`, { user_id: uid, content: answer })
+        .then(() => { showToast("Answer posted!", "info"); loadDoubts(); })
+        .catch((e) => showToast(e.message || "Failed to post answer", "error"));
+    }
+  </script>
+</body>
+</html>

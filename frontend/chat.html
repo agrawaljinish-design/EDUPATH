@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Companion — EduPath</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .prompt-chip {
+      display: inline-flex; align-items: center;
+      padding: 7px 13px; border-radius: var(--radius-full);
+      font-size: 12px; font-weight: 600;
+      background: var(--bg-surface); border: 1px solid var(--border-card);
+      color: var(--text-secondary); cursor: pointer; transition: var(--transition);
+    }
+    .prompt-chip:hover { border-color: var(--primary); color: #fff; background: var(--primary-subtle); }
+    .typing-dots span {
+      display: inline-block; width: 6px; height: 6px;
+      border-radius: 50%; background: var(--text-muted);
+      animation: blink 1.2s infinite;
+    }
+    .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes blink { 0%,100%{opacity:0.2;} 50%{opacity:1;} }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo-icon">🎓</div>
+        <div><div class="sidebar-logo-text">EduPath</div><span class="sidebar-badge">Adaptive AI</span></div>
+      </div>
+      <div class="nav-section-title">Personalized Learning</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="dashboard.html"><span class="nav-icon">📊</span> Dashboard</a></li>
+        <li class="nav-item"><a href="profile.html"><span class="nav-icon">👤</span> Learner Profile</a></li>
+        <li class="nav-item"><a href="resume.html"><span class="nav-icon">📄</span> Resume Upload</a></li>
+        <li class="nav-item"><a href="skills.html"><span class="nav-icon">🎯</span> Skill Gaps</a></li>
+        <li class="nav-item"><a href="roadmap.html"><span class="nav-icon">🗺️</span> Roadmap Timeline</a></li>
+        <li class="nav-item"><a href="plan.html"><span class="nav-icon">📅</span> Today's Plan</a></li>
+        <li class="nav-item"><a href="assessment.html"><span class="nav-icon">📝</span> Assessments</a></li>
+        <li class="nav-item"><a href="revision.html"><span class="nav-icon">🔄</span> Revision Queue</a></li>
+        <li class="nav-item"><a href="projects.html"><span class="nav-icon">🚀</span> Projects</a></li>
+        <li class="nav-item active"><a href="chat.html"><span class="nav-icon">💬</span> AI Companion</a></li>
+      </ul>
+      <div class="nav-section-title">Peer Collaboration</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="peers.html"><span class="nav-icon">👥</span> Peer Discovery</a></li>
+        <li class="nav-item"><a href="friends.html"><span class="nav-icon">🤝</span> Friends</a></li>
+        <li class="nav-item"><a href="doubts.html"><span class="nav-icon">❓</span> Doubt Forum</a></li>
+        <li class="nav-item"><a href="groups.html"><span class="nav-icon">🏢</span> Study Groups</a></li>
+        <li class="nav-item"><a href="community.html"><span class="nav-icon">🌐</span> Community Feed</a></li>
+      </ul>
+      <div class="nav-section-title">Competitive Learning</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="challenges.html"><span class="nav-icon">⚡</span> Challenges</a></li>
+        <li class="nav-item"><a href="leaderboard.html"><span class="nav-icon">🏆</span> Leaderboard</a></li>
+        <li class="nav-item"><a href="badges.html"><span class="nav-icon">🎖️</span> Badges</a></li>
+        <li class="nav-item"><a href="progress.html"><span class="nav-icon">📈</span> Analytics</a></li>
+        <li class="nav-item"><a href="reports.html"><span class="nav-icon">📑</span> Weekly Reports</a></li>
+      </ul>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <div class="topbar-search-box">
+            <input type="text" class="topbar-search-input" placeholder="Search conversation... (Press /)">
+            <span class="topbar-search-key">/</span>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <div id="topbarStreak" class="metric-pill streak">🔥 1d</div>
+          <div id="topbarXP" class="metric-pill xp">⭐ 0 XP</div>
+          <div id="modeIndicator" class="mode-badge real">👤 Real Learner</div>
+          <button id="btnImStuck" class="btn-stuck">🚨 I'm Stuck</button>
+          <a href="profile.html" class="user-avatar-pill">
+            <div id="topbarAvatarText" class="user-avatar-circle">L</div>
+            <span id="topbarUserName" style="font-size:13px;font-weight:600;color:#fff;">Learner</span>
+          </a>
+          <a href="login.html" class="btn btn-secondary btn-sm">Switch</a>
+        </div>
+      </header>
+
+      <div class="page-body">
+        <div style="margin-bottom:20px;">
+          <h1 style="font-size:26px; font-weight:900; color:#fff; letter-spacing:-0.03em; margin-bottom:4px;">🤖 AI Learning Companion</h1>
+          <p style="color:var(--text-secondary); font-size:13.5px;">Ask why you're learning specific prerequisites, get unstuck, or explore any concept in your roadmap.</p>
+        </div>
+
+        <div class="chat-split-container">
+          <!-- Left: Student Context Panel -->
+          <div class="chat-context-panel">
+            <div>
+              <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; color:var(--text-muted); margin-bottom:12px;">Your Context</div>
+              <div style="display:flex; flex-direction:column; gap:10px;">
+                <div style="padding:12px; background:rgba(255,255,255,0.02); border:1px solid var(--border-subtle); border-radius:10px;">
+                  <div style="font-size:11px; color:var(--text-muted); margin-bottom:3px;">Target Role</div>
+                  <div id="ctxRole" style="font-size:14px; font-weight:700; color:#fff;">Loading...</div>
+                </div>
+                <div style="padding:12px; background:rgba(255,255,255,0.02); border:1px solid var(--border-subtle); border-radius:10px;">
+                  <div style="font-size:11px; color:var(--text-muted); margin-bottom:3px;">Current Focus</div>
+                  <div id="ctxSkill" style="font-size:14px; font-weight:700; color:#C4B5FD;">—</div>
+                </div>
+                <div style="padding:12px; background:rgba(255,255,255,0.02); border:1px solid var(--border-subtle); border-radius:10px;">
+                  <div style="font-size:11px; color:var(--text-muted); margin-bottom:3px;">Roadmap Progress</div>
+                  <div id="ctxProgress" style="font-size:14px; font-weight:700; color:var(--color-success);">—</div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.6px; color:var(--text-muted); margin-bottom:10px;">Prompt Suggestions</div>
+              <div style="display:flex; flex-direction:column; gap:8px;" id="promptChips">
+                <button class="prompt-chip" onclick="fillPrompt(this)">Why am I learning SQL before PyTorch?</button>
+                <button class="prompt-chip" onclick="fillPrompt(this)">Explain JOIN types with a simple analogy</button>
+                <button class="prompt-chip" onclick="fillPrompt(this)">What are the prerequisites for neural networks?</button>
+                <button class="prompt-chip" onclick="fillPrompt(this)">Give me a practice problem for today's topic</button>
+                <button class="prompt-chip" onclick="fillPrompt(this)">How long until I'm ready for this role?</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Chat Messages -->
+          <div class="chat-conversation-panel">
+            <div class="chat-messages" id="chatMessages">
+              <div class="chat-bubble assistant">
+                <div style="font-size:12px; font-weight:700; color:#C4B5FD; margin-bottom:6px;">EduPath AI</div>
+                Hello! 👋 I'm your personalized learning companion. I have full context of your skill gaps, roadmap, and daily plan. Ask me anything — from "Why am I learning this?" to deep concept explanations, or request practice problems.
+              </div>
+            </div>
+
+            <div class="chat-input-bar">
+              <input type="text" id="chatInput" class="form-input" placeholder="Ask anything about your learning journey..." style="flex:1;" onkeydown="if(event.key==='Enter') sendMessage()">
+              <button id="chatSendBtn" class="btn btn-primary" onclick="sendMessage()">Send →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- I'm Stuck Modal -->
+  <div id="stuckModal" class="modal-overlay">
+    <div class="modal-card">
+      <button id="stuckModalClose" class="modal-close">✕</button>
+      <h3 style="font-size:20px; font-weight:800; color:#fff; margin-bottom:6px;">🚨 Need Help?</h3>
+      <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px;">
+        <button type="button" class="stuck-reason-chip selected" data-reason="I don't understand the concept">I don't understand the concept</button>
+        <button type="button" class="stuck-reason-chip" data-reason="I'm getting wrong answers">I'm getting wrong answers</button>
+        <button type="button" class="stuck-reason-chip" data-reason="The exercises are too difficult">Exercises too difficult</button>
+        <button type="button" class="stuck-reason-chip" data-reason="Something else...">Something else...</button>
+      </div>
+      <input type="hidden" id="stuckReasonChoice" value="I don't understand the concept">
+      <div class="form-group"><label class="form-label">Blocking skill</label><input type="text" id="stuckSkillInput" class="form-input" placeholder="e.g. SQL & Data Querying"></div>
+      <div class="form-group"><label class="form-label">Specific topic</label><input type="text" id="stuckTopicInput" class="form-input" placeholder="e.g. Multi-table JOINs"></div>
+      <button id="stuckFormSubmit" class="btn btn-primary" style="width:100%;">Trigger Adaptive Replanning ⚡</button>
+      <div id="stuckInterventionResult" style="display:none; margin-top:20px;"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    let uid;
+    document.addEventListener("DOMContentLoaded", async () => {
+      uid = getUserId();
+      try {
+        const profile = await api.get(`/profile/${uid}`);
+        document.getElementById("ctxRole").innerText = profile.target_role || "AI/ML Engineer";
+        const roadmap = await api.get(`/roadmap/${uid}`);
+        const items = roadmap.roadmap_items || roadmap.items || [];
+        const current = items.find(i => i.status === "in_progress" || i.status === "current");
+        document.getElementById("ctxSkill").innerText = current?.title || items[0]?.title || "Getting Started";
+        const progress = await api.get(`/progress/${uid}`);
+        document.getElementById("ctxProgress").innerText = `${progress.summary?.roadmap_progress_percent || 0}% complete`;
+      } catch(e) {}
+    });
+
+    function fillPrompt(btn) {
+      document.getElementById("chatInput").value = btn.innerText;
+      document.getElementById("chatInput").focus();
+    }
+
+    async function sendMessage() {
+      const input = document.getElementById("chatInput");
+      const msg = input.value.trim();
+      if (!msg) return;
+      const btn = document.getElementById("chatSendBtn");
+      btn.disabled = true;
+      input.value = "";
+
+      const messages = document.getElementById("chatMessages");
+      messages.innerHTML += `<div class="chat-bubble user">${msg}</div>`;
+      messages.innerHTML += `<div class="chat-bubble assistant typing-dots" id="typingIndicator"><span></span><span></span><span></span></div>`;
+      messages.scrollTop = messages.scrollHeight;
+
+      try {
+        const res = await api.post("/chat", { user_id: uid, message: msg });
+        const typingEl = document.getElementById("typingIndicator");
+        if (typingEl) {
+          typingEl.outerHTML = `<div class="chat-bubble assistant"><div style="font-size:12px; font-weight:700; color:#C4B5FD; margin-bottom:6px;">EduPath AI</div>${(res.response || "").replace(/\n/g, "<br>")}</div>`;
+        }
+      } catch(e) {
+        const typingEl = document.getElementById("typingIndicator");
+        if (typingEl) typingEl.outerHTML = `<div class="chat-bubble assistant" style="color:#F87171;">Failed to get response. Please check backend.</div>`;
+      }
+
+      messages.scrollTop = messages.scrollHeight;
+      btn.disabled = false;
+    }
+  </script>
+</body>
+</html>

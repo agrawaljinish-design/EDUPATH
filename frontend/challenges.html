@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Challenges — EduPath</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo-icon">🎓</div>
+        <div><div class="sidebar-logo-text">EduPath</div><span class="sidebar-badge">Adaptive AI</span></div>
+      </div>
+      <div class="nav-section-title">Personalized Learning</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="dashboard.html"><span class="nav-icon">📊</span> Dashboard</a></li>
+        <li class="nav-item"><a href="profile.html"><span class="nav-icon">👤</span> Learner Profile</a></li>
+        <li class="nav-item"><a href="resume.html"><span class="nav-icon">📄</span> Resume Upload</a></li>
+        <li class="nav-item"><a href="skills.html"><span class="nav-icon">🎯</span> Skill Gaps</a></li>
+        <li class="nav-item"><a href="roadmap.html"><span class="nav-icon">🗺️</span> Roadmap Timeline</a></li>
+        <li class="nav-item"><a href="plan.html"><span class="nav-icon">📅</span> Today's Plan</a></li>
+        <li class="nav-item"><a href="assessment.html"><span class="nav-icon">📝</span> Assessments</a></li>
+        <li class="nav-item"><a href="revision.html"><span class="nav-icon">🔄</span> Revision Queue</a></li>
+        <li class="nav-item"><a href="projects.html"><span class="nav-icon">🚀</span> Projects</a></li>
+        <li class="nav-item"><a href="chat.html"><span class="nav-icon">💬</span> AI Companion</a></li>
+      </ul>
+      <div class="nav-section-title">Peer Collaboration</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="peers.html"><span class="nav-icon">👥</span> Peer Discovery</a></li>
+        <li class="nav-item"><a href="friends.html"><span class="nav-icon">🤝</span> Friends</a></li>
+        <li class="nav-item"><a href="doubts.html"><span class="nav-icon">❓</span> Doubt Forum</a></li>
+        <li class="nav-item"><a href="groups.html"><span class="nav-icon">🏢</span> Study Groups</a></li>
+        <li class="nav-item"><a href="community.html"><span class="nav-icon">🌐</span> Community Feed</a></li>
+      </ul>
+      <div class="nav-section-title">Competitive Learning</div>
+      <ul class="nav-menu">
+        <li class="nav-item active"><a href="challenges.html"><span class="nav-icon">⚡</span> Challenges</a></li>
+        <li class="nav-item"><a href="leaderboard.html"><span class="nav-icon">🏆</span> Leaderboard</a></li>
+        <li class="nav-item"><a href="badges.html"><span class="nav-icon">🎖️</span> Badges</a></li>
+        <li class="nav-item"><a href="progress.html"><span class="nav-icon">📈</span> Analytics</a></li>
+        <li class="nav-item"><a href="reports.html"><span class="nav-icon">📑</span> Weekly Reports</a></li>
+      </ul>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <div class="topbar-search-box">
+            <input type="text" class="topbar-search-input" placeholder="Search challenges... (Press /)">
+            <span class="topbar-search-key">/</span>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <div id="topbarStreak" class="metric-pill streak">🔥 1d</div>
+          <div id="topbarXP" class="metric-pill xp">⭐ 0 XP</div>
+          <div id="modeIndicator" class="mode-badge real">👤 Real Learner</div>
+          <button id="btnImStuck" class="btn-stuck">🚨 I'm Stuck</button>
+          <a href="profile.html" class="user-avatar-pill">
+            <div id="topbarAvatarText" class="user-avatar-circle">L</div>
+            <span id="topbarUserName" style="font-size:13px;font-weight:600;color:#fff;">Learner</span>
+          </a>
+          <a href="login.html" class="btn btn-secondary btn-sm">Switch</a>
+        </div>
+      </header>
+
+      <div class="page-body">
+        <h1 style="font-size:28px; font-weight:900; color:#fff; letter-spacing:-0.03em; margin-bottom:6px;">⚡ Skill Challenges</h1>
+        <p style="color:var(--text-secondary); font-size:14px; margin-bottom:28px;">Complete targeted challenges to earn bonus XP, badges, and leaderboard boosts.</p>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(320px, 1fr)); gap:20px;" id="challengeGrid">
+          <div style="grid-column:1/-1; text-align:center; padding:40px; color:var(--text-muted);">Loading challenges...</div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div id="stuckModal" class="modal-overlay">
+    <div class="modal-card">
+      <button id="stuckModalClose" class="modal-close">✕</button>
+      <h3 style="font-size:20px; font-weight:800; color:#fff; margin-bottom:6px;">🚨 Need Help?</h3>
+      <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px;">
+        <button type="button" class="stuck-reason-chip selected" data-reason="I don't understand the concept">I don't understand the concept</button>
+        <button type="button" class="stuck-reason-chip" data-reason="I'm getting wrong answers">I'm getting wrong answers</button>
+        <button type="button" class="stuck-reason-chip" data-reason="The exercises are too difficult">Exercises too difficult</button>
+        <button type="button" class="stuck-reason-chip" data-reason="Something else...">Something else...</button>
+      </div>
+      <input type="hidden" id="stuckReasonChoice" value="I don't understand the concept">
+      <div class="form-group"><label class="form-label">Blocking skill</label><input type="text" id="stuckSkillInput" class="form-input" placeholder="e.g. SQL & Data Querying"></div>
+      <div class="form-group"><label class="form-label">Specific topic</label><input type="text" id="stuckTopicInput" class="form-input" placeholder="e.g. Multi-table JOINs"></div>
+      <button id="stuckFormSubmit" class="btn btn-primary" style="width:100%;">Trigger Adaptive Replanning ⚡</button>
+      <div id="stuckInterventionResult" style="display:none; margin-top:20px;"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      await loadChallenges();
+    });
+
+    async function loadChallenges() {
+      const uid = getUserId();
+      try {
+        const data = await api.get(`/challenges?user_id=${encodeURIComponent(uid)}`);
+        const challenges = data.challenges || [];
+        const grid = document.getElementById("challengeGrid");
+        if (challenges.length === 0) {
+          grid.innerHTML = "<div style='grid-column:1/-1; text-align:center; padding:60px; color:var(--text-muted);'>No challenges available yet. Check back soon!</div>";
+          return;
+        }
+        grid.innerHTML = challenges.map(c => {
+          const status = c.status || "Available";
+          const current = c.current_value || 0;
+          const target = c.target_value || 1;
+          const pct = Math.min(100, Math.round((current / Math.max(target, 1)) * 100));
+          const statusColor = status === "Completed" ? "success" : (status === "In Progress" ? "warning" : "info");
+          const safeTitle = (c.title || "").replace(/'/g, "\\'");
+          let actionBtn = "";
+          if (status === "Completed") {
+            actionBtn = `<button class="btn btn-secondary" style="width:100%;" disabled>Completed ✓</button>`;
+          } else if (status === "In Progress" || status === "Joined") {
+            actionBtn = `<button class="btn btn-primary" style="width:100%;" onclick="completeChallenge('${c.id}', '${safeTitle}')">Mark Complete →</button>`;
+          } else {
+            actionBtn = `<button class="btn btn-primary" style="width:100%;" onclick="joinChallenge('${c.id}', '${safeTitle}')">Join Challenge →</button>`;
+          }
+          return `
+          <div class="card" style="transition:all 0.25s;" onmouseover="this.style.borderColor='rgba(124,58,237,0.5)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='';this.style.transform=''">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px;">
+              <div>
+                <div style="font-size:28px; margin-bottom:8px;">⚡</div>
+                <h3 style="font-size:16px; font-weight:700; color:#fff; margin-bottom:4px;">${c.title || ""}</h3>
+                <div style="font-size:12px; color:var(--text-muted);">${c.category || "learning"}</div>
+              </div>
+              <div style="display:flex; flex-direction:column; align-items:flex-end; gap:6px;">
+                <span class="badge badge-${statusColor}">${status}</span>
+                <div style="font-size:18px; font-weight:800; color:#FCD34D;">+${c.xp_reward || 0} XP</div>
+              </div>
+            </div>
+            <p style="font-size:13px; color:var(--text-secondary); line-height:1.5; margin-bottom:14px;">${c.description || ""}</p>
+            <div style="margin-bottom:14px;">
+              <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--text-muted); margin-bottom:6px;">
+                <span>Progress</span>
+                <span>${current} / ${target}</span>
+              </div>
+              <div class="progress-bar-container">
+                <div class="progress-bar-fill" style="width:${pct}%;"></div>
+              </div>
+            </div>
+            ${actionBtn}
+          </div>`;
+        }).join("");
+      } catch(e) {
+        document.getElementById("challengeGrid").innerHTML = "<div style='grid-column:1/-1; text-align:center; padding:40px; color:var(--text-muted);'>Could not load challenges.</div>";
+      }
+    }
+
+    async function joinChallenge(id, name) {
+      try {
+        await api.post(`/challenges/${id}/join`, { user_id: getUserId() });
+        showToast(`Joined "${name}".`, "info");
+        await loadChallenges();
+      } catch(e) {
+        showToast(e.message || `Could not join "${name}".`, "error");
+      }
+    }
+
+    async function completeChallenge(id, name) {
+      try {
+        const res = await api.post(`/challenges/${id}/complete`, { user_id: getUserId() });
+        const xp = res && res.xp_reward ? ` +${res.xp_reward} XP` : "";
+        showToast(`Completed "${name}".${xp}`, "info");
+        await loadChallenges();
+      } catch(e) {
+        showToast(e.message || `Could not complete "${name}".`, "error");
+      }
+    }
+  </script>
+</body>
+</html>

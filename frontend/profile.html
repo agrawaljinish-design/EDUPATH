@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learner Profile — EduPath</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo-icon">🎓</div>
+        <div>
+          <div class="sidebar-logo-text">EduPath</div>
+          <span class="sidebar-badge">Adaptive AI</span>
+        </div>
+      </div>
+      <div class="nav-section-title">Personalized Learning</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="dashboard.html"><span class="nav-icon">📊</span> Dashboard</a></li>
+        <li class="nav-item active"><a href="profile.html"><span class="nav-icon">👤</span> Learner Profile</a></li>
+        <li class="nav-item"><a href="resume.html"><span class="nav-icon">📄</span> Resume Upload</a></li>
+        <li class="nav-item"><a href="skills.html"><span class="nav-icon">🎯</span> Skill Gaps</a></li>
+        <li class="nav-item"><a href="roadmap.html"><span class="nav-icon">🗺️</span> Roadmap Timeline</a></li>
+        <li class="nav-item"><a href="plan.html"><span class="nav-icon">📅</span> Today's Plan</a></li>
+        <li class="nav-item"><a href="assessment.html"><span class="nav-icon">📝</span> Assessments</a></li>
+        <li class="nav-item"><a href="revision.html"><span class="nav-icon">🔄</span> Revision Queue</a></li>
+        <li class="nav-item"><a href="projects.html"><span class="nav-icon">🚀</span> Projects</a></li>
+        <li class="nav-item"><a href="chat.html"><span class="nav-icon">💬</span> AI Companion</a></li>
+      </ul>
+      <div class="nav-section-title">Peer Collaboration</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="peers.html"><span class="nav-icon">👥</span> Peer Discovery</a></li>
+        <li class="nav-item"><a href="friends.html"><span class="nav-icon">🤝</span> Friends</a></li>
+        <li class="nav-item"><a href="doubts.html"><span class="nav-icon">❓</span> Doubt Forum</a></li>
+        <li class="nav-item"><a href="groups.html"><span class="nav-icon">🏢</span> Study Groups</a></li>
+        <li class="nav-item"><a href="community.html"><span class="nav-icon">🌐</span> Community Feed</a></li>
+      </ul>
+      <div class="nav-section-title">Competitive Learning</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="challenges.html"><span class="nav-icon">⚡</span> Challenges</a></li>
+        <li class="nav-item"><a href="leaderboard.html"><span class="nav-icon">🏆</span> Leaderboard</a></li>
+        <li class="nav-item"><a href="badges.html"><span class="nav-icon">🎖️</span> Badges</a></li>
+        <li class="nav-item"><a href="progress.html"><span class="nav-icon">📈</span> Analytics</a></li>
+        <li class="nav-item"><a href="reports.html"><span class="nav-icon">📑</span> Weekly Reports</a></li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <div class="topbar-search-box">
+            <input type="text" class="topbar-search-input" placeholder="Search profile settings... (Press /)">
+            <span class="topbar-search-key">/</span>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <div id="topbarStreak" class="metric-pill streak">🔥 1d</div>
+          <div id="topbarXP" class="metric-pill xp">⭐ 0 XP</div>
+          <div id="modeIndicator" class="mode-badge real">👤 Real Learner</div>
+          <button id="btnImStuck" class="btn-stuck">🚨 I'm Stuck</button>
+          <a href="profile.html" class="user-avatar-pill">
+            <div id="topbarAvatarText" class="user-avatar-circle">L</div>
+            <span id="topbarUserName" style="font-size:13px;font-weight:600;color:#fff;">Learner</span>
+          </a>
+          <a href="login.html" class="btn btn-secondary btn-sm">Switch</a>
+        </div>
+      </header>
+
+      <div class="page-body">
+        <div style="margin-bottom: 24px;">
+          <h1 style="font-size:28px; font-weight:900; color:#fff; letter-spacing:-0.03em; margin-bottom:6px;">👤 Learner Profile & Goals</h1>
+          <p style="color:var(--text-secondary); font-size:14px;">EduPath dynamically calculates topological DAG roadmaps and skill gaps based on your background and target aspirations.</p>
+        </div>
+
+        <div class="card" style="max-width: 900px; margin: 0 auto;">
+          <div class="card-header" style="flex-wrap: wrap; gap: 12px;">
+            <div>
+              <h3 class="card-title">Personalized Career Trajectory</h3>
+              <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">
+                Changes saved here recalculate missing prerequisites across the entire curriculum.
+              </p>
+            </div>
+            <a href="resume.html" class="btn btn-secondary btn-sm" style="display:flex; align-items:center; gap:6px;">
+              <span>📄</span> Autofill from Resume PDF
+            </a>
+          </div>
+
+          <form id="profileForm">
+            <div class="grid-2">
+              <div class="form-group">
+                <label class="form-label">Full Name</label>
+                <input type="text" id="profName" class="form-input" placeholder="e.g. Alex Chen" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Target Role</label>
+                <select id="profTargetRole" class="form-select">
+                  <option value="AI/ML Engineer">AI/ML Engineer</option>
+                  <option value="Software Engineer">Software Engineer</option>
+                  <option value="Frontend Developer">Frontend Developer</option>
+                  <option value="Backend Developer">Backend Developer</option>
+                  <option value="Full Stack Developer">Full Stack Developer</option>
+                  <option value="Data Analyst">Data Analyst</option>
+                  <option value="Data Scientist">Data Scientist</option>
+                  <option value="Cloud Engineer">Cloud Engineer</option>
+                  <option value="DevOps Engineer">DevOps Engineer</option>
+                  <option value="Cybersecurity Analyst">Cybersecurity Analyst</option>
+                  <option value="Mobile App Developer">Mobile App Developer</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="grid-2">
+              <div class="form-group">
+                <label class="form-label">Current Education</label>
+                <input type="text" id="profEducation" class="form-input" placeholder="e.g. B.S. in Computer Science, Year 3">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Experience Level</label>
+                <input type="text" id="profExperience" class="form-input" placeholder="e.g. Student / 1 year internship">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Current Verified Skills (Comma-separated)</label>
+              <input type="text" id="profSkills" class="form-input" placeholder="e.g. Python, Git, HTML, Docker, SQL">
+              <span style="font-size: 12px; color: var(--text-dim); margin-top: 6px; display: block;">
+                Skills listed here are recognized by the gap engine as already mastered.
+              </span>
+            </div>
+
+            <div class="grid-2">
+              <div class="form-group">
+                <label class="form-label">Available Study Hours / Week</label>
+                <input type="number" id="profHours" class="form-input" min="2" max="60" value="10">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Preferred Difficulty Pace</label>
+                <select id="profDifficulty" class="form-select">
+                  <option value="Beginner">Beginner — Step-by-step foundation</option>
+                  <option value="Intermediate" selected>Intermediate — Balanced acceleration</option>
+                  <option value="Advanced">Advanced — Intensive industry speed</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Specific Career Goal</label>
+              <input type="text" id="profGoal" class="form-input" placeholder="e.g. Land an AI/ML internship within 6 months">
+            </div>
+
+            <div class="grid-2">
+              <div class="form-group">
+                <label class="form-label">Projects Built (Comma-separated)</label>
+                <textarea id="profProjects" class="form-textarea" rows="2" placeholder="e.g. Weather App, Personal Portfolio, REST API"></textarea>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Certifications / Courses (Comma-separated)</label>
+                <textarea id="profCerts" class="form-textarea" rows="2" placeholder="e.g. CS50, Coursera Deep Learning, AWS Cloud Practitioner"></textarea>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 14px; margin-top: 28px; flex-wrap: wrap;">
+              <button type="submit" class="btn btn-primary" style="flex: 2; padding: 14px;">Save Profile & Recalculate Gaps 💾</button>
+              <button type="button" class="btn btn-accent" onclick="rebuildRoadmap()" style="flex: 1; padding: 14px;">Generate Roadmap 🗺️</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Stuck Modal -->
+  <div id="stuckModal" class="modal-overlay">
+    <div class="modal-card">
+      <button id="stuckModalClose" class="modal-close">✕</button>
+      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+        <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(239, 68, 68, 0.2); display: flex; align-items: center; justify-content: center; font-size: 20px;">🚨</div>
+        <div>
+          <h3 style="font-family: var(--font-heading); font-size: 20px; font-weight: 700; color: #fff;">Need Help? Let's Adapt Your Path</h3>
+          <p style="font-size: 13px; color: var(--text-muted);">EduPath will adaptively insert targeted reinforcement.</p>
+        </div>
+      </div>
+      <form id="stuckForm">
+        <div class="form-group">
+          <label class="form-label">Which skill or concept is blocking you?</label>
+          <input type="text" id="stuckSkillInput" class="form-input" placeholder="e.g. SQL & Data Querying, NumPy, Python" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Specific topic or obstacle (Optional)</label>
+          <input type="text" id="stuckTopicInput" class="form-input" placeholder="e.g. Multi-table JOINs, broadcasting">
+        </div>
+        <button type="button" id="stuckFormSubmit" class="btn btn-primary" style="width: 100%;">Trigger Adaptive Replanning ⚡</button>
+      </form>
+      <div id="stuckInterventionResult" style="display: none;"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const uid = getUserId();
+      try {
+        const p = await api.get(`/profile/${uid}`);
+        if (p) {
+          document.getElementById("profName").value = p.name || "";
+          document.getElementById("profTargetRole").value = p.target_role || "AI/ML Engineer";
+          document.getElementById("profEducation").value = p.education || "";
+          document.getElementById("profExperience").value = p.experience || "";
+          document.getElementById("profSkills").value = (p.current_skills || []).join(", ");
+          document.getElementById("profHours").value = p.hours_per_week || 10;
+          document.getElementById("profDifficulty").value = p.preferred_difficulty || "Intermediate";
+          document.getElementById("profGoal").value = p.career_goal || "";
+          document.getElementById("profProjects").value = (p.projects || []).join(", ");
+          document.getElementById("profCerts").value = (p.certifications || []).join(", ");
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    });
+
+    document.getElementById("profileForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const uid = getUserId();
+      const skillsArr = document.getElementById("profSkills").value.split(",").map(s => s.trim()).filter(Boolean);
+      const projectsArr = document.getElementById("profProjects").value.split(",").map(s => s.trim()).filter(Boolean);
+      const certsArr = document.getElementById("profCerts").value.split(",").map(s => s.trim()).filter(Boolean);
+
+      const payload = {
+        user_id: uid,
+        name: document.getElementById("profName").value.trim(),
+        target_role: document.getElementById("profTargetRole").value,
+        education: document.getElementById("profEducation").value.trim(),
+        experience: document.getElementById("profExperience").value.trim(),
+        current_skills: skillsArr,
+        hours_per_week: parseInt(document.getElementById("profHours").value) || 10,
+        preferred_difficulty: document.getElementById("profDifficulty").value,
+        career_goal: document.getElementById("profGoal").value.trim(),
+        projects: projectsArr,
+        certifications: certsArr
+      };
+
+      try {
+        await api.post("/profile", payload);
+        await api.post("/skill-gaps/analyze", { user_id: uid, target_role: payload.target_role });
+        showToast("Profile and skill gaps updated successfully!", "info");
+      } catch (err) {
+        console.error(err);
+      }
+    });
+
+    async function rebuildRoadmap() {
+      const uid = getUserId();
+      showToast("Synthesizing personalized roadmap...", "info");
+      try {
+        await api.post("/roadmap/generate", { user_id: uid });
+        window.location.href = "roadmap.html";
+      } catch (e) {}
+    }
+  </script>
+</body>
+</html>

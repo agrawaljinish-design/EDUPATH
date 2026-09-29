@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Community Feed — EduPath</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .category-filter-btn {
+      padding: 8px 16px;
+      border-radius: 9999px;
+      font-size: 13px;
+      font-weight: 600;
+      border: 1px solid var(--border-subtle);
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .category-filter-btn:hover {
+      border-color: var(--primary);
+      color: #fff;
+    }
+    .category-filter-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(124, 58, 237, 0.35);
+    }
+    .post-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      transition: all 0.2s ease;
+    }
+    .post-card:hover {
+      border-color: rgba(124, 58, 237, 0.35);
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo-icon">🎓</div>
+        <div>
+          <div class="sidebar-logo-text">EduPath</div>
+          <span class="sidebar-badge">Adaptive AI</span>
+        </div>
+      </div>
+      <div class="nav-section-title">Personalized Learning</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="dashboard.html"><span class="nav-icon">📊</span> Dashboard</a></li>
+        <li class="nav-item"><a href="profile.html"><span class="nav-icon">👤</span> Learner Profile</a></li>
+        <li class="nav-item"><a href="resume.html"><span class="nav-icon">📄</span> Resume Upload</a></li>
+        <li class="nav-item"><a href="skills.html"><span class="nav-icon">🎯</span> Skill Gaps</a></li>
+        <li class="nav-item"><a href="roadmap.html"><span class="nav-icon">🗺️</span> Roadmap Timeline</a></li>
+        <li class="nav-item"><a href="plan.html"><span class="nav-icon">📅</span> Today's Plan</a></li>
+        <li class="nav-item"><a href="assessment.html"><span class="nav-icon">📝</span> Assessments</a></li>
+        <li class="nav-item"><a href="revision.html"><span class="nav-icon">🔄</span> Revision Queue</a></li>
+        <li class="nav-item"><a href="projects.html"><span class="nav-icon">🚀</span> Projects</a></li>
+        <li class="nav-item"><a href="chat.html"><span class="nav-icon">💬</span> AI Companion</a></li>
+      </ul>
+      <div class="nav-section-title">Peer Collaboration</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="peers.html"><span class="nav-icon">👥</span> Peer Discovery</a></li>
+        <li class="nav-item"><a href="friends.html"><span class="nav-icon">🤝</span> Friends</a></li>
+        <li class="nav-item"><a href="doubts.html"><span class="nav-icon">❓</span> Doubt Forum</a></li>
+        <li class="nav-item"><a href="groups.html"><span class="nav-icon">🏢</span> Study Groups</a></li>
+        <li class="nav-item active"><a href="community.html"><span class="nav-icon">🌐</span> Community Feed</a></li>
+      </ul>
+      <div class="nav-section-title">Competitive Learning</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="challenges.html"><span class="nav-icon">⚡</span> Challenges</a></li>
+        <li class="nav-item"><a href="leaderboard.html"><span class="nav-icon">🏆</span> Leaderboard</a></li>
+        <li class="nav-item"><a href="badges.html"><span class="nav-icon">🎖️</span> Badges</a></li>
+        <li class="nav-item"><a href="progress.html"><span class="nav-icon">📈</span> Analytics</a></li>
+        <li class="nav-item"><a href="reports.html"><span class="nav-icon">📑</span> Weekly Reports</a></li>
+      </ul>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <div class="topbar-search-box">
+            <input type="text" class="topbar-search-input" placeholder="Search community feed... (Press /)">
+            <span class="topbar-search-key">/</span>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <div id="topbarStreak" class="metric-pill streak">🔥 1d</div>
+          <div id="topbarXP" class="metric-pill xp">⭐ 0 XP</div>
+          <div id="modeIndicator" class="mode-badge real">👤 Real Learner</div>
+          <button id="btnImStuck" class="btn-stuck">🚨 I'm Stuck</button>
+          <a href="profile.html" class="user-avatar-pill">
+            <div id="topbarAvatarText" class="user-avatar-circle">L</div>
+            <span id="topbarUserName" style="font-size:13px;font-weight:600;color:#fff;">Learner</span>
+          </a>
+          <a href="login.html" class="btn btn-secondary btn-sm">Switch</a>
+        </div>
+      </header>
+
+      <div class="page-body">
+        <div style="margin-bottom: 24px;">
+          <h1 style="font-size:28px; font-weight:900; color:#fff; letter-spacing:-0.03em; margin-bottom:6px;">🌐 Community Feed & Discourse</h1>
+          <p style="color:var(--text-secondary); font-size:14px;">Celebrate milestones, publish capstones, exchange study methods, and discuss curriculum hurdles with global learners.</p>
+        </div>
+
+        <!-- Create Post Card -->
+        <div class="card" style="margin-bottom: 28px;">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">✍️ Share with the Community</h3>
+              <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Share breakthroughs, project demos, or study techniques</p>
+            </div>
+            <span class="tag tag-medium">Public Stream</span>
+          </div>
+          <form id="createPostForm">
+            <div class="grid-2">
+              <div class="form-group">
+                <label class="form-label">Post Title</label>
+                <input type="text" id="postTitle" class="form-input" placeholder="e.g. Just completed my first end-to-end Scikit-learn Classifier project!" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Category</label>
+                <select id="postCategory" class="form-select">
+                  <option value="Project">🚀 Project Showcase</option>
+                  <option value="Achievement">🏆 Milestone / Achievement</option>
+                  <option value="Discussion">💬 Discussion & Concept</option>
+                  <option value="Resource">📚 Recommended Resource</option>
+                  <option value="Question">❓ Peer Question</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Post Content</label>
+              <textarea id="postContent" class="form-textarea" rows="3" placeholder="Share insights, code takeaways, links, or what you learned..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" style="padding: 12px 24px;">Publish Post 🚀</button>
+          </form>
+        </div>
+
+        <!-- Filter bar -->
+        <div style="display: flex; gap: 10px; margin-bottom: 22px; flex-wrap: wrap;">
+          <button class="category-filter-btn active" onclick="filterCategory('All', this)">All Posts</button>
+          <button class="category-filter-btn" onclick="filterCategory('Project', this)">🚀 Projects</button>
+          <button class="category-filter-btn" onclick="filterCategory('Achievement', this)">🏆 Achievements</button>
+          <button class="category-filter-btn" onclick="filterCategory('Discussion', this)">💬 Discussions</button>
+          <button class="category-filter-btn" onclick="filterCategory('Resource', this)">📚 Resources</button>
+        </div>
+
+        <!-- Feed List -->
+        <div id="communityPostsContainer" style="display: flex; flex-direction: column; gap: 20px;">
+          <div style="text-align:center; padding:30px; color:var(--text-muted);">Loading community discussions...</div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Stuck Modal -->
+  <div id="stuckModal" class="modal-overlay">
+    <div class="modal-card">
+      <button id="stuckModalClose" class="modal-close">✕</button>
+      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+        <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(239, 68, 68, 0.2); display: flex; align-items: center; justify-content: center; font-size: 20px;">🚨</div>
+        <div>
+          <h3 style="font-family: var(--font-heading); font-size: 20px; font-weight: 700; color: #fff;">Need Help? Let's Adapt Your Path</h3>
+          <p style="font-size: 13px; color: var(--text-muted);">EduPath will adaptively insert targeted reinforcement.</p>
+        </div>
+      </div>
+      <form id="stuckForm">
+        <div class="form-group">
+          <label class="form-label">Which skill or concept is blocking you?</label>
+          <input type="text" id="stuckSkillInput" class="form-input" placeholder="e.g. SQL & Data Querying, NumPy, Python" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Specific topic or obstacle (Optional)</label>
+          <input type="text" id="stuckTopicInput" class="form-input" placeholder="e.g. Multi-table JOINs, broadcasting">
+        </div>
+        <button type="button" id="stuckFormSubmit" class="btn btn-primary" style="width: 100%;">Trigger Adaptive Replanning ⚡</button>
+      </form>
+      <div id="stuckInterventionResult" style="display: none;"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    let activeCategory = "All";
+
+    document.addEventListener("DOMContentLoaded", async () => {
+      await loadPosts();
+    });
+
+    async function loadPosts() {
+      try {
+        const url = activeCategory === "All" ? "/community/posts" : `/community/posts?category=${activeCategory}`;
+        const res = await api.get(url);
+        let posts = res.posts || [];
+
+        if (posts.length === 0 && activeCategory === "All") {
+          await api.post("/community/posts", {
+            user_id: "peer_sarah_ml",
+            category: "Achievement",
+            title: "Cracked the 7-day streak and finished the Scikit-learn module!",
+            content: "Consistent daily 30-minute practice truly makes a difference. The trick with multi-table joins is sketching the Venn diagrams before writing query syntax!"
+          });
+          const reloaded = await api.get("/community/posts");
+          posts = reloaded.posts || [];
+        }
+
+        const container = document.getElementById("communityPostsContainer");
+        let html = "";
+        for (const p of posts) {
+          const commRes = await api.get(`/community/posts/${p.id}/comments`);
+          const comments = commRes.comments || [];
+
+          html += `
+            <div class="post-card">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; gap: 8px;">
+                <div>
+                  <span class="tag tag-medium" style="margin-bottom: 8px; display:inline-block;">${p.category}</span>
+                  <h4 style="color: #fff; font-size: 18px; font-weight: 700; letter-spacing:-0.02em;">${p.title}</h4>
+                  <div style="font-size: 12px; color: var(--text-dim); margin-top: 4px; display:flex; align-items:center; gap:6px;">
+                    <div style="width:20px; height:20px; border-radius:50%; background:var(--primary); color:#fff; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:700;">
+                      ${(p.author_name || "L").charAt(0).toUpperCase()}
+                    </div>
+                    <span>Posted by <strong style="color:#fff;">${p.author_name}</strong></span>
+                  </div>
+                </div>
+              </div>
+
+              <p style="font-size: 14px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 18px;">${p.content}</p>
+
+              <!-- Comments Section -->
+              <div style="border-top: 1px solid var(--border-subtle); padding-top: 14px; margin-top: 14px;">
+                <div style="font-size: 11px; font-weight: 700; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 10px;">
+                  💬 Comments (${comments.length})
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px;">
+                  ${comments.map(c => `
+                    <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-subtle); padding: 10px 14px; border-radius: 8px; font-size: 13px;">
+                      <strong style="color: #c4b5fd;">${c.author_name}:</strong> <span style="color: var(--text-secondary);">${c.content}</span>
+                    </div>
+                  `).join("")}
+                </div>
+
+                <div style="display: flex; gap: 10px;">
+                  <input type="text" id="commInput_${p.id}" class="form-input" placeholder="Add a comment or congratulations..." style="padding: 9px 14px;">
+                  <button class="btn btn-secondary btn-sm" onclick="addComment('${p.id}')">Comment</button>
+                </div>
+              </div>
+            </div>
+          `;
+        }
+        container.innerHTML = html;
+
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    function filterCategory(cat, el) {
+      activeCategory = cat;
+      document.querySelectorAll(".category-filter-btn").forEach(btn => btn.classList.remove("active"));
+      if (el) el.classList.add("active");
+      loadPosts();
+    }
+
+    document.getElementById("createPostForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const uid = getUserId();
+      const title = document.getElementById("postTitle").value.trim();
+      const category = document.getElementById("postCategory").value;
+      const content = document.getElementById("postContent").value.trim();
+
+      try {
+        await api.post("/community/posts", {
+          user_id: uid,
+          category: category,
+          title: title,
+          content: content
+        });
+        showToast("Post shared to community feed!", "info");
+        document.getElementById("createPostForm").reset();
+        await loadPosts();
+      } catch (err) {
+        console.error(err);
+      }
+    });
+
+    async function addComment(postId) {
+      const input = document.getElementById(`commInput_${postId}`);
+      const content = input.value.trim();
+      if (!content) return;
+
+      try {
+        await api.post(`/community/posts/${postId}/comments`, {
+          user_id: getUserId(),
+          content: content
+        });
+        showToast("Comment added!", "info");
+        await loadPosts();
+      } catch (err) {
+        console.error(err);
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.venv
+
+# Secrets & Credentials
+.env
+.env.local
+*.pem
+*firebase*.json
+service-account*.json
+credentials*.json
+
+# Data & SQLite / Local storage
+backend/data/*.json
+!backend/data/.gitkeep
+
+# Logs & temp
+*.log
+.DS_Store
+.vscode/
+.idea/
+tmp/
+scratch/

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resume / Portfolio Upload — EduPath</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo-icon">🎓</div>
+        <div>
+          <div class="sidebar-logo-text">EduPath</div>
+          <span class="sidebar-badge">Adaptive AI</span>
+        </div>
+      </div>
+      <div class="nav-section-title">Personalized Learning</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="dashboard.html"><span class="nav-icon">📊</span> Dashboard</a></li>
+        <li class="nav-item"><a href="profile.html"><span class="nav-icon">👤</span> Learner Profile</a></li>
+        <li class="nav-item active"><a href="resume.html"><span class="nav-icon">📄</span> Resume Upload</a></li>
+        <li class="nav-item"><a href="skills.html"><span class="nav-icon">🎯</span> Skill Gaps</a></li>
+        <li class="nav-item"><a href="roadmap.html"><span class="nav-icon">🗺️</span> Roadmap Timeline</a></li>
+        <li class="nav-item"><a href="plan.html"><span class="nav-icon">📅</span> Today's Plan</a></li>
+        <li class="nav-item"><a href="assessment.html"><span class="nav-icon">📝</span> Assessments</a></li>
+        <li class="nav-item"><a href="revision.html"><span class="nav-icon">🔄</span> Revision Queue</a></li>
+        <li class="nav-item"><a href="projects.html"><span class="nav-icon">🚀</span> Projects</a></li>
+        <li class="nav-item"><a href="chat.html"><span class="nav-icon">💬</span> AI Companion</a></li>
+      </ul>
+      <div class="nav-section-title">Peer Collaboration</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="peers.html"><span class="nav-icon">👥</span> Peer Discovery</a></li>
+        <li class="nav-item"><a href="friends.html"><span class="nav-icon">🤝</span> Friends</a></li>
+        <li class="nav-item"><a href="doubts.html"><span class="nav-icon">❓</span> Doubt Forum</a></li>
+        <li class="nav-item"><a href="groups.html"><span class="nav-icon">🏢</span> Study Groups</a></li>
+        <li class="nav-item"><a href="community.html"><span class="nav-icon">🌐</span> Community Feed</a></li>
+      </ul>
+      <div class="nav-section-title">Competitive Learning</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="challenges.html"><span class="nav-icon">⚡</span> Challenges</a></li>
+        <li class="nav-item"><a href="leaderboard.html"><span class="nav-icon">🏆</span> Leaderboard</a></li>
+        <li class="nav-item"><a href="badges.html"><span class="nav-icon">🎖️</span> Badges</a></li>
+        <li class="nav-item"><a href="progress.html"><span class="nav-icon">📈</span> Analytics</a></li>
+        <li class="nav-item"><a href="reports.html"><span class="nav-icon">📑</span> Weekly Reports</a></li>
+      </ul>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <div class="topbar-search-box">
+            <input type="text" class="topbar-search-input" placeholder="Search parsing history... (Press /)">
+            <span class="topbar-search-key">/</span>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <div id="topbarStreak" class="metric-pill streak">🔥 1d</div>
+          <div id="topbarXP" class="metric-pill xp">⭐ 0 XP</div>
+          <div id="modeIndicator" class="mode-badge real">👤 Real Learner</div>
+          <button id="btnImStuck" class="btn-stuck">🚨 I'm Stuck</button>
+          <a href="profile.html" class="user-avatar-pill">
+            <div id="topbarAvatarText" class="user-avatar-circle">L</div>
+            <span id="topbarUserName" style="font-size:13px;font-weight:600;color:#fff;">Learner</span>
+          </a>
+          <a href="login.html" class="btn btn-secondary btn-sm">Switch</a>
+        </div>
+      </header>
+
+      <div class="page-body">
+        <div style="margin-bottom: 24px;">
+          <h1 style="font-size:28px; font-weight:900; color:#fff; letter-spacing:-0.03em; margin-bottom:6px;">📄 Resume & Portfolio Parser</h1>
+          <p style="color:var(--text-secondary); font-size:14px;">Upload your PDF resume or curriculum to automatically extract existing skills, experience, and projects using PyMuPDF.</p>
+        </div>
+
+        <div class="card" style="margin-bottom: 28px;">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">Upload PDF Document</h3>
+              <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">
+                Our parsing pipeline extracts skills, projects, and education. You will review everything before saving.
+              </p>
+            </div>
+            <span class="tag tag-medium">PyMuPDF Enabled</span>
+          </div>
+
+          <div id="dropZone" style="border: 2px dashed rgba(124, 58, 237, 0.4); border-radius: 14px; padding: 44px 20px; text-align: center; background: rgba(17, 24, 39, 0.5); transition: border-color 0.2s, background 0.2s; cursor: pointer;">
+            <div style="font-size: 48px; margin-bottom: 12px; filter: drop-shadow(0 4px 12px rgba(124,58,237,0.3));">📄</div>
+            <h4 style="color: #fff; font-size: 16px; font-weight: 700; margin-bottom: 6px;">Click or Drag & Drop your PDF Resume</h4>
+            <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 18px;">Supports PDF up to 10MB</p>
+            <input type="file" id="resumeFileInput" accept=".pdf" style="display: none;">
+            <button type="button" class="btn btn-secondary" onclick="document.getElementById('resumeFileInput').click()">
+              Browse Files
+            </button>
+            <span id="selectedFileName" style="display: block; margin-top: 14px; font-size: 13px; font-weight:600; color: #a5b4fc;"></span>
+          </div>
+
+          <div style="margin-top: 24px; display: flex; justify-content: flex-end;">
+            <button id="btnUploadExtract" class="btn btn-primary" style="padding: 12px 24px;" disabled>
+              Extract & Analyze Resume 🚀
+            </button>
+          </div>
+        </div>
+
+        <!-- Extracted Information Review Box -->
+        <div id="extractionPreviewCard" class="card" style="display: none;">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">🔍 Review & Confirm Extracted Profile</h3>
+              <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">
+                Verify extracted items below. You can modify skills, projects, and role before committing to your learning profile.
+              </p>
+            </div>
+            <span class="tag tag-success">✓ Extraction Complete</span>
+          </div>
+
+          <form id="confirmedExtractForm">
+            <div class="form-group">
+              <label class="form-label">Extracted Skills (Edit or add comma-separated)</label>
+              <textarea id="extSkills" class="form-textarea" rows="3"></textarea>
+            </div>
+
+            <div class="grid-2">
+              <div class="form-group">
+                <label class="form-label">Education Extracted</label>
+                <textarea id="extEducation" class="form-textarea" rows="2"></textarea>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Experience Extracted</label>
+                <textarea id="extExperience" class="form-textarea" rows="2"></textarea>
+              </div>
+            </div>
+
+            <div class="grid-2">
+              <div class="form-group">
+                <label class="form-label">Projects Identified</label>
+                <textarea id="extProjects" class="form-textarea" rows="2"></textarea>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Tools & Frameworks</label>
+                <textarea id="extTools" class="form-textarea" rows="2"></textarea>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Confirm Target Career Role</label>
+              <select id="confirmRole" class="form-select">
+                <option value="AI/ML Engineer">AI/ML Engineer</option>
+                <option value="Software Engineer">Software Engineer</option>
+                <option value="Frontend Developer">Frontend Developer</option>
+                <option value="Backend Developer">Backend Developer</option>
+                <option value="Full Stack Developer">Full Stack Developer</option>
+                <option value="Data Analyst">Data Analyst</option>
+                <option value="Data Scientist">Data Scientist</option>
+                <option value="Cloud Engineer">Cloud Engineer</option>
+                <option value="DevOps Engineer">DevOps Engineer</option>
+                <option value="Cybersecurity Analyst">Cybersecurity Analyst</option>
+                <option value="Mobile App Developer">Mobile App Developer</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 14px; font-weight:700;">
+              Confirm & Generate Personalized Skill Gaps →
+            </button>
+          </form>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Stuck Modal -->
+  <div id="stuckModal" class="modal-overlay">
+    <div class="modal-card">
+      <button id="stuckModalClose" class="modal-close">✕</button>
+      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+        <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(239, 68, 68, 0.2); display: flex; align-items: center; justify-content: center; font-size: 20px;">🚨</div>
+        <div>
+          <h3 style="font-family: var(--font-heading); font-size: 20px; font-weight: 700; color: #fff;">Need Help? Let's Adapt Your Path</h3>
+          <p style="font-size: 13px; color: var(--text-muted);">EduPath will adaptively insert targeted reinforcement.</p>
+        </div>
+      </div>
+      <form id="stuckForm">
+        <div class="form-group">
+          <label class="form-label">Which skill or concept is blocking you?</label>
+          <input type="text" id="stuckSkillInput" class="form-input" placeholder="e.g. SQL & Data Querying, NumPy, Python" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Specific topic or obstacle (Optional)</label>
+          <input type="text" id="stuckTopicInput" class="form-input" placeholder="e.g. Multi-table JOINs, broadcasting">
+        </div>
+        <button type="button" id="stuckFormSubmit" class="btn btn-primary" style="width: 100%;">Trigger Adaptive Replanning ⚡</button>
+      </form>
+      <div id="stuckInterventionResult" style="display: none;"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    let uploadedFile = null;
+
+    const fileInput = document.getElementById("resumeFileInput");
+    const dropZone = document.getElementById("dropZone");
+
+    dropZone.addEventListener("click", () => fileInput.click());
+    dropZone.addEventListener("dragover", (e) => {
+      e.preventDefault();
+      dropZone.style.borderColor = "var(--primary)";
+      dropZone.style.background = "rgba(124, 58, 237, 0.1)";
+    });
+    dropZone.addEventListener("dragleave", () => {
+      dropZone.style.borderColor = "rgba(124, 58, 237, 0.4)";
+      dropZone.style.background = "rgba(17, 24, 39, 0.5)";
+    });
+    dropZone.addEventListener("drop", (e) => {
+      e.preventDefault();
+      dropZone.style.borderColor = "rgba(124, 58, 237, 0.4)";
+      dropZone.style.background = "rgba(17, 24, 39, 0.5)";
+      if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+        handleFileSelect(e.dataTransfer.files[0]);
+      }
+    });
+
+    fileInput.addEventListener("change", (e) => {
+      if (e.target.files && e.target.files[0]) {
+        handleFileSelect(e.target.files[0]);
+      }
+    });
+
+    function handleFileSelect(file) {
+      if (!file.name.toLowerCase().endsWith(".pdf")) {
+        showToast("Please upload a valid PDF document.", "error");
+        return;
+      }
+      uploadedFile = file;
+      document.getElementById("selectedFileName").innerText = `✓ Selected: ${uploadedFile.name} (${Math.round(uploadedFile.size / 1024)} KB)`;
+      document.getElementById("btnUploadExtract").disabled = false;
+    }
+
+    document.getElementById("btnUploadExtract").addEventListener("click", async () => {
+      if (!uploadedFile) return;
+
+      const btn = document.getElementById("btnUploadExtract");
+      btn.disabled = true;
+      btn.innerHTML = `<span class="spinner" style="display:inline-block; width:16px; height:16px; border:2px solid #fff; border-top-color:transparent; border-radius:50%; animation:spin 0.8s linear infinite; vertical-align:middle; margin-right:8px;"></span> Extracting with PyMuPDF...`;
+
+      const formData = new FormData();
+      formData.append("file", uploadedFile);
+
+      try {
+        const res = await api.upload("/resume/upload", formData);
+        const data = res.data;
+
+        document.getElementById("extractionPreviewCard").style.display = "block";
+        document.getElementById("extSkills").value = (data.skills || []).join(", ");
+        document.getElementById("extEducation").value = (data.education || []).join("\n");
+        document.getElementById("extExperience").value = (data.experience || []).join("\n");
+        document.getElementById("extProjects").value = (data.projects || []).join("\n");
+        document.getElementById("extTools").value = (data.tools || []).concat(data.technologies || []).join(", ");
+
+        showToast("Resume parsed successfully! Please review and confirm.", "info");
+        document.getElementById("extractionPreviewCard").scrollIntoView({ behavior: "smooth" });
+      } catch (err) {
+        console.error(err);
+      } finally {
+        btn.disabled = false;
+        btn.innerText = "Extract & Analyze Resume 🚀";
+      }
+    });
+
+    document.getElementById("confirmedExtractForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const uid = getUserId();
+      const skills = document.getElementById("extSkills").value.split(",").map(s => s.trim()).filter(Boolean);
+      const role = document.getElementById("confirmRole").value;
+      const edu = document.getElementById("extEducation").value.trim();
+      const exp = document.getElementById("extExperience").value.trim();
+
+      try {
+        await api.post("/profile/analyze", {
+          user_id: uid,
+          target_role: role,
+          current_skills: skills,
+          education: edu,
+          experience: exp,
+          hours_per_week: 10
+        });
+
+        await api.post("/roadmap/generate", { user_id: uid });
+        showToast("Profile and roadmap updated from resume!", "info");
+        setTimeout(() => { window.location.href = "skills.html"; }, 800);
+      } catch (err) {
+        console.error(err);
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Peer Discovery — EduPath</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo-icon">🎓</div>
+        <div><div class="sidebar-logo-text">EduPath</div><span class="sidebar-badge">Adaptive AI</span></div>
+      </div>
+      <div class="nav-section-title">Personalized Learning</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="dashboard.html"><span class="nav-icon">📊</span> Dashboard</a></li>
+        <li class="nav-item"><a href="profile.html"><span class="nav-icon">👤</span> Learner Profile</a></li>
+        <li class="nav-item"><a href="resume.html"><span class="nav-icon">📄</span> Resume Upload</a></li>
+        <li class="nav-item"><a href="skills.html"><span class="nav-icon">🎯</span> Skill Gaps</a></li>
+        <li class="nav-item"><a href="roadmap.html"><span class="nav-icon">🗺️</span> Roadmap Timeline</a></li>
+        <li class="nav-item"><a href="plan.html"><span class="nav-icon">📅</span> Today's Plan</a></li>
+        <li class="nav-item"><a href="assessment.html"><span class="nav-icon">📝</span> Assessments</a></li>
+        <li class="nav-item"><a href="revision.html"><span class="nav-icon">🔄</span> Revision Queue</a></li>
+        <li class="nav-item"><a href="projects.html"><span class="nav-icon">🚀</span> Projects</a></li>
+        <li class="nav-item"><a href="chat.html"><span class="nav-icon">💬</span> AI Companion</a></li>
+      </ul>
+      <div class="nav-section-title">Peer Collaboration</div>
+      <ul class="nav-menu">
+        <li class="nav-item active"><a href="peers.html"><span class="nav-icon">👥</span> Peer Discovery</a></li>
+        <li class="nav-item"><a href="friends.html"><span class="nav-icon">🤝</span> Friends</a></li>
+        <li class="nav-item"><a href="doubts.html"><span class="nav-icon">❓</span> Doubt Forum</a></li>
+        <li class="nav-item"><a href="groups.html"><span class="nav-icon">🏢</span> Study Groups</a></li>
+        <li class="nav-item"><a href="community.html"><span class="nav-icon">🌐</span> Community Feed</a></li>
+      </ul>
+      <div class="nav-section-title">Competitive Learning</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="challenges.html"><span class="nav-icon">⚡</span> Challenges</a></li>
+        <li class="nav-item"><a href="leaderboard.html"><span class="nav-icon">🏆</span> Leaderboard</a></li>
+        <li class="nav-item"><a href="badges.html"><span class="nav-icon">🎖️</span> Badges</a></li>
+        <li class="nav-item"><a href="progress.html"><span class="nav-icon">📈</span> Analytics</a></li>
+        <li class="nav-item"><a href="reports.html"><span class="nav-icon">📑</span> Weekly Reports</a></li>
+      </ul>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <div class="topbar-search-box">
+            <input type="text" class="topbar-search-input" placeholder="Search peers by skill... (Press /)">
+            <span class="topbar-search-key">/</span>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <div id="topbarStreak" class="metric-pill streak">🔥 1d</div>
+          <div id="topbarXP" class="metric-pill xp">⭐ 0 XP</div>
+          <div id="modeIndicator" class="mode-badge real">👤 Real Learner</div>
+          <button id="btnImStuck" class="btn-stuck">🚨 I'm Stuck</button>
+          <a href="profile.html" class="user-avatar-pill">
+            <div id="topbarAvatarText" class="user-avatar-circle">L</div>
+            <span id="topbarUserName" style="font-size:13px;font-weight:600;color:#fff;">Learner</span>
+          </a>
+          <a href="login.html" class="btn btn-secondary btn-sm">Switch</a>
+        </div>
+      </header>
+
+      <div class="page-body">
+        <!-- Hero Banner -->
+        <div style="background:linear-gradient(135deg, rgba(6,182,212,0.1), rgba(124,58,237,0.08)); border:1px solid rgba(6,182,212,0.3); border-radius:var(--radius-lg); padding:32px; margin-bottom:28px; text-align:center;">
+          <div style="font-size:36px; margin-bottom:12px;">🤝</div>
+          <h1 style="font-size:28px; font-weight:900; color:#fff; letter-spacing:-0.03em; margin-bottom:8px;">Ask. Answer. Learn together.</h1>
+          <p style="color:var(--text-secondary); font-size:15px; max-width:600px; margin:0 auto;">EduPath matches you with complementary learners — if you struggle with SQL, we connect you with someone strong in SQL who needs your Python expertise.</p>
+        </div>
+
+        <!-- Peer Cards Grid -->
+        <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:20px;" id="peerGrid">
+          <div style="grid-column:1/-1; text-align:center; padding:40px; color:var(--text-muted);">Loading peer matches...</div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div id="stuckModal" class="modal-overlay">
+    <div class="modal-card">
+      <button id="stuckModalClose" class="modal-close">✕</button>
+      <h3 style="font-size:20px; font-weight:800; color:#fff; margin-bottom:6px;">🚨 Need Help?</h3>
+      <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px;">
+        <button type="button" class="stuck-reason-chip selected" data-reason="I don't understand the concept">I don't understand the concept</button>
+        <button type="button" class="stuck-reason-chip" data-reason="I'm getting wrong answers">I'm getting wrong answers</button>
+        <button type="button" class="stuck-reason-chip" data-reason="The exercises are too difficult">Exercises too difficult</button>
+        <button type="button" class="stuck-reason-chip" data-reason="Something else...">Something else...</button>
+      </div>
+      <input type="hidden" id="stuckReasonChoice" value="I don't understand the concept">
+      <div class="form-group"><label class="form-label">Blocking skill</label><input type="text" id="stuckSkillInput" class="form-input" placeholder="e.g. SQL & Data Querying"></div>
+      <div class="form-group"><label class="form-label">Specific topic</label><input type="text" id="stuckTopicInput" class="form-input" placeholder="e.g. Multi-table JOINs"></div>
+      <button id="stuckFormSubmit" class="btn btn-primary" style="width:100%;">Trigger Adaptive Replanning ⚡</button>
+      <div id="stuckInterventionResult" style="display:none; margin-top:20px;"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const uid = getUserId();
+      try {
+        const data = await api.get(`/peers?user_id=${encodeURIComponent(uid)}`);
+        const peers = data.peers || [];
+        const grid = document.getElementById("peerGrid");
+        if (peers.length === 0) {
+          grid.innerHTML = "<div style='grid-column:1/-1; text-align:center; padding:40px; color:var(--text-muted);'>No peer matches found yet. Complete your profile to get personalized matches!</div>";
+          return;
+        }
+        grid.innerHTML = peers.map(p => {
+          const complementary = p.complementary_skills || [];
+          const shared = p.shared_skills || [];
+          const stars = "★".repeat(Math.min(5, Math.round(p.reputation || 4)));
+          const empty = "☆".repeat(5 - stars.length);
+          const peerId = p.user_id || "";
+          const peerName = (p.name || "Peer Learner").replace(/'/g, "\\'");
+          return `
+          <div class="card" style="transition:all 0.25s; cursor:default;" onmouseover="this.style.borderColor='rgba(6,182,212,0.5)';this.style.transform='translateY(-4px)';" onmouseout="this.style.borderColor='';this.style.transform='';">
+            <div style="display:flex; align-items:flex-start; gap:14px; margin-bottom:16px;">
+              <div class="user-avatar-circle" style="width:48px;height:48px;font-size:18px;flex-shrink:0;">${(p.name||'P')[0]}</div>
+              <div style="flex:1; min-width:0;">
+                <div style="font-size:15px; font-weight:700; color:#fff;">${p.name || "Peer Learner"}</div>
+                <div style="font-size:12px; color:var(--text-muted);">${p.target_role || "Learner"}</div>
+                <div style="color:#FBBF24; font-size:14px; margin-top:2px;">${stars}<span style="color:var(--border-subtle);">${empty}</span></div>
+              </div>
+            </div>
+
+            ${p.match_reason ? `<div style="font-size:13px; color:#C4B5FD; background:rgba(124,58,237,0.1); border:1px solid rgba(124,58,237,0.2); border-radius:8px; padding:10px; margin-bottom:14px;">💡 ${p.match_reason}</div>` : ''}
+
+            <div style="display:flex; gap:6px; flex-wrap:wrap; margin-bottom:14px;">
+              ${complementary.slice(0,3).map(s => `<span class="badge badge-success">${s}</span>`).join("")}
+              ${shared.slice(0,2).map(s => `<span class="badge badge-warning">${s}</span>`).join("")}
+            </div>
+
+            <button class="btn btn-primary" style="width:100%;" onclick="connectPeer('${peerId}', '${peerName}')">Connect →</button>
+          </div>`;
+        }).join("");
+      } catch(e) {
+        document.getElementById("peerGrid").innerHTML = "<div style='grid-column:1/-1; text-align:center; padding:40px; color:var(--text-muted);'>Failed to load peers. Ensure profile is set up.</div>";
+      }
+    });
+
+    async function connectPeer(peerId, name) {
+      if (!peerId) {
+        showToast("Cannot send a friend request: missing peer id.", "error");
+        return;
+      }
+      try {
+        const res = await api.post("/friends/request", {
+          from_user_id: getUserId(),
+          to_user_id: peerId
+        });
+        if (res && res.status === "accepted") {
+          showToast(`You are already friends with ${name}.`, "info");
+        } else if (res && res.status === "pending") {
+          showToast(`Friend request sent to ${name}.`, "info");
+        } else {
+          showToast(`Friend request sent to ${name}. Check Friends to accept incoming requests.`, "info");
+        }
+      } catch(e) {
+        showToast(e.message || `Could not send friend request to ${name}.`, "error");
+      }
+    }
+  </script>
+</body>
+</html>

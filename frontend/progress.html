@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analytics & Progress — EduPath</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo-icon">🎓</div>
+        <div><div class="sidebar-logo-text">EduPath</div><span class="sidebar-badge">Adaptive AI</span></div>
+      </div>
+      <div class="nav-section-title">Personalized Learning</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="dashboard.html"><span class="nav-icon">📊</span> Dashboard</a></li>
+        <li class="nav-item"><a href="profile.html"><span class="nav-icon">👤</span> Learner Profile</a></li>
+        <li class="nav-item"><a href="resume.html"><span class="nav-icon">📄</span> Resume Upload</a></li>
+        <li class="nav-item"><a href="skills.html"><span class="nav-icon">🎯</span> Skill Gaps</a></li>
+        <li class="nav-item"><a href="roadmap.html"><span class="nav-icon">🗺️</span> Roadmap Timeline</a></li>
+        <li class="nav-item"><a href="plan.html"><span class="nav-icon">📅</span> Today's Plan</a></li>
+        <li class="nav-item"><a href="assessment.html"><span class="nav-icon">📝</span> Assessments</a></li>
+        <li class="nav-item"><a href="revision.html"><span class="nav-icon">🔄</span> Revision Queue</a></li>
+        <li class="nav-item"><a href="projects.html"><span class="nav-icon">🚀</span> Projects</a></li>
+        <li class="nav-item"><a href="chat.html"><span class="nav-icon">💬</span> AI Companion</a></li>
+      </ul>
+      <div class="nav-section-title">Peer Collaboration</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="peers.html"><span class="nav-icon">👥</span> Peer Discovery</a></li>
+        <li class="nav-item"><a href="friends.html"><span class="nav-icon">🤝</span> Friends</a></li>
+        <li class="nav-item"><a href="doubts.html"><span class="nav-icon">❓</span> Doubt Forum</a></li>
+        <li class="nav-item"><a href="groups.html"><span class="nav-icon">🏢</span> Study Groups</a></li>
+        <li class="nav-item"><a href="community.html"><span class="nav-icon">🌐</span> Community Feed</a></li>
+      </ul>
+      <div class="nav-section-title">Competitive Learning</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="challenges.html"><span class="nav-icon">⚡</span> Challenges</a></li>
+        <li class="nav-item"><a href="leaderboard.html"><span class="nav-icon">🏆</span> Leaderboard</a></li>
+        <li class="nav-item"><a href="badges.html"><span class="nav-icon">🎖️</span> Badges</a></li>
+        <li class="nav-item active"><a href="progress.html"><span class="nav-icon">📈</span> Analytics</a></li>
+        <li class="nav-item"><a href="reports.html"><span class="nav-icon">📑</span> Weekly Reports</a></li>
+      </ul>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <div class="topbar-search-box">
+            <input type="text" class="topbar-search-input" placeholder="Search analytics... (Press /)">
+            <span class="topbar-search-key">/</span>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <div id="topbarStreak" class="metric-pill streak">🔥 1d</div>
+          <div id="topbarXP" class="metric-pill xp">⭐ 0 XP</div>
+          <div id="modeIndicator" class="mode-badge real">👤 Real Learner</div>
+          <button id="btnImStuck" class="btn-stuck">🚨 I'm Stuck</button>
+          <a href="profile.html" class="user-avatar-pill">
+            <div id="topbarAvatarText" class="user-avatar-circle">L</div>
+            <span id="topbarUserName" style="font-size:13px;font-weight:600;color:#fff;">Learner</span>
+          </a>
+          <a href="login.html" class="btn btn-secondary btn-sm">Switch</a>
+        </div>
+      </header>
+
+      <div class="page-body">
+        <h1 style="font-size:28px; font-weight:900; color:#fff; letter-spacing:-0.03em; margin-bottom:6px;">📈 Learning Analytics</h1>
+        <p style="color:var(--text-secondary); font-size:14px; margin-bottom:28px;">Visualize your velocity, completed activities, and learning momentum over time.</p>
+
+        <!-- Core Metrics -->
+        <div class="stats-grid" style="margin-bottom:28px;">
+          <div class="stat-card">
+            <div class="stat-header"><span class="stat-label">Total XP Earned</span></div>
+            <div class="stat-value" id="pgXP" style="color:#FCD34D;">0</div>
+            <div style="font-size:12px; color:var(--text-muted); margin-top:6px;">Immutable, earned through learning</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-header"><span class="stat-label">Activities Done</span></div>
+            <div class="stat-value" id="pgActivities">0</div>
+            <div style="font-size:12px; color:var(--text-muted); margin-top:6px;">Learn + Practice + Revise sessions</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-header"><span class="stat-label">Assessments Passed</span></div>
+            <div class="stat-value" id="pgAssessments" style="color:var(--color-success);">0</div>
+            <div style="font-size:12px; color:var(--text-muted); margin-top:6px;">Verified skill checkpoints</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-header"><span class="stat-label">Roadmap Progress</span></div>
+            <div class="stat-value" id="pgRoadmap">0%</div>
+            <div class="progress-bar-container" style="margin-top:8px;">
+              <div id="pgRoadmapBar" class="progress-bar-fill success" style="width:0%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Activity History Log -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">📋 Activity History</h3>
+              <p style="font-size:12px; color:var(--text-muted);">Complete log of your learning sessions</p>
+            </div>
+          </div>
+          <div id="activityLog" style="display:flex; flex-direction:column; gap:12px;">
+            <div style="text-align:center; padding:30px; color:var(--text-muted);">Loading activity history...</div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div id="stuckModal" class="modal-overlay">
+    <div class="modal-card">
+      <button id="stuckModalClose" class="modal-close">✕</button>
+      <h3 style="font-size:20px; font-weight:800; color:#fff; margin-bottom:6px;">🚨 Need Help?</h3>
+      <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px;">
+        <button type="button" class="stuck-reason-chip selected" data-reason="I don't understand the concept">I don't understand the concept</button>
+        <button type="button" class="stuck-reason-chip" data-reason="I'm getting wrong answers">I'm getting wrong answers</button>
+        <button type="button" class="stuck-reason-chip" data-reason="The exercises are too difficult">Exercises too difficult</button>
+        <button type="button" class="stuck-reason-chip" data-reason="Something else...">Something else...</button>
+      </div>
+      <input type="hidden" id="stuckReasonChoice" value="I don't understand the concept">
+      <div class="form-group"><label class="form-label">Blocking skill</label><input type="text" id="stuckSkillInput" class="form-input" placeholder="e.g. SQL & Data Querying"></div>
+      <div class="form-group"><label class="form-label">Specific topic</label><input type="text" id="stuckTopicInput" class="form-input" placeholder="e.g. Multi-table JOINs"></div>
+      <button id="stuckFormSubmit" class="btn btn-primary" style="width:100%;">Trigger Adaptive Replanning ⚡</button>
+      <div id="stuckInterventionResult" style="display:none; margin-top:20px;"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      const uid = getUserId();
+      try {
+        const data = await api.get(`/progress/${uid}`);
+        const s = data.summary || {};
+        document.getElementById("pgXP").innerText = (s.total_xp || 0).toLocaleString();
+        document.getElementById("pgActivities").innerText = s.completed_activities || 0;
+        document.getElementById("pgAssessments").innerText = s.assessments_passed || 0;
+        const pct = s.roadmap_progress_percent || 0;
+        document.getElementById("pgRoadmap").innerText = `${pct}%`;
+        document.getElementById("pgRoadmapBar").style.width = `${pct}%`;
+
+        const activities = data.recent_activities || [];
+        const log = document.getElementById("activityLog");
+        if (activities.length === 0) {
+          log.innerHTML = "<p style='text-align:center; color:var(--text-muted); padding:20px;'>No activity yet. Complete your first task to see history here!</p>";
+        } else {
+          log.innerHTML = activities.slice(0, 20).map(a => {
+            const typeColor = a.activity_type === "lesson" || a.activity_type === "learn" ? "#C4B5FD" : (a.activity_type === "practice" ? "#67E8F9" : "#FBBF24");
+            const when = a.timestamp || a.completed_at;
+            return `
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 14px; background:rgba(255,255,255,0.02); border:1px solid var(--border-subtle); border-radius:10px; gap:12px; flex-wrap:wrap;">
+              <div>
+                <span style="font-size:11px; font-weight:700; text-transform:uppercase; color:${typeColor}; margin-right:8px;">${a.activity_type || 'ACTIVITY'}</span>
+                <span style="font-size:14px; font-weight:600; color:#fff;">${a.title || a.skill || "Activity"}</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:14px; font-size:12px; color:var(--text-muted);">
+                ${a.time_spent_minutes ? `<span>${a.time_spent_minutes} min</span>` : ''}
+                <span>${when ? new Date(when).toLocaleDateString() : ""}</span>
+              </div>
+            </div>`;
+          }).join("");
+        }
+      } catch(e) {
+        document.getElementById("activityLog").innerHTML = "<p style='text-align:center; color:var(--text-muted); padding:20px;'>Could not load analytics. Check backend.</p>";
+      }
+    });
+  </script>
+</body>
+</html>

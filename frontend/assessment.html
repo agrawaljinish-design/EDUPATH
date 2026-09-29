@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skill Assessment — EduPath</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .option-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      font-size: 14px;
+      color: var(--text-secondary);
+      transition: all 0.2s ease;
+    }
+    .option-card:hover {
+      background: rgba(124, 58, 237, 0.08);
+      border-color: rgba(124, 58, 237, 0.4);
+      color: #fff;
+    }
+    .option-card input[type="radio"]:checked + span {
+      color: #fff;
+      font-weight: 600;
+    }
+    .option-card:has(input[type="radio"]:checked) {
+      background: rgba(124, 58, 237, 0.15);
+      border-color: var(--primary);
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo-icon">🎓</div>
+        <div>
+          <div class="sidebar-logo-text">EduPath</div>
+          <span class="sidebar-badge">Adaptive AI</span>
+        </div>
+      </div>
+      <div class="nav-section-title">Personalized Learning</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="dashboard.html"><span class="nav-icon">📊</span> Dashboard</a></li>
+        <li class="nav-item"><a href="profile.html"><span class="nav-icon">👤</span> Learner Profile</a></li>
+        <li class="nav-item"><a href="resume.html"><span class="nav-icon">📄</span> Resume Upload</a></li>
+        <li class="nav-item"><a href="skills.html"><span class="nav-icon">🎯</span> Skill Gaps</a></li>
+        <li class="nav-item"><a href="roadmap.html"><span class="nav-icon">🗺️</span> Roadmap Timeline</a></li>
+        <li class="nav-item"><a href="plan.html"><span class="nav-icon">📅</span> Today's Plan</a></li>
+        <li class="nav-item active"><a href="assessment.html"><span class="nav-icon">📝</span> Assessments</a></li>
+        <li class="nav-item"><a href="revision.html"><span class="nav-icon">🔄</span> Revision Queue</a></li>
+        <li class="nav-item"><a href="projects.html"><span class="nav-icon">🚀</span> Projects</a></li>
+        <li class="nav-item"><a href="chat.html"><span class="nav-icon">💬</span> AI Companion</a></li>
+      </ul>
+      <div class="nav-section-title">Peer Collaboration</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="peers.html"><span class="nav-icon">👥</span> Peer Discovery</a></li>
+        <li class="nav-item"><a href="friends.html"><span class="nav-icon">🤝</span> Friends</a></li>
+        <li class="nav-item"><a href="doubts.html"><span class="nav-icon">❓</span> Doubt Forum</a></li>
+        <li class="nav-item"><a href="groups.html"><span class="nav-icon">🏢</span> Study Groups</a></li>
+        <li class="nav-item"><a href="community.html"><span class="nav-icon">🌐</span> Community Feed</a></li>
+      </ul>
+      <div class="nav-section-title">Competitive Learning</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="challenges.html"><span class="nav-icon">⚡</span> Challenges</a></li>
+        <li class="nav-item"><a href="leaderboard.html"><span class="nav-icon">🏆</span> Leaderboard</a></li>
+        <li class="nav-item"><a href="badges.html"><span class="nav-icon">🎖️</span> Badges</a></li>
+        <li class="nav-item"><a href="progress.html"><span class="nav-icon">📈</span> Analytics</a></li>
+        <li class="nav-item"><a href="reports.html"><span class="nav-icon">📑</span> Weekly Reports</a></li>
+      </ul>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <div class="topbar-search-box">
+            <input type="text" class="topbar-search-input" placeholder="Search assessments... (Press /)">
+            <span class="topbar-search-key">/</span>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <div id="topbarStreak" class="metric-pill streak">🔥 1d</div>
+          <div id="topbarXP" class="metric-pill xp">⭐ 0 XP</div>
+          <div id="modeIndicator" class="mode-badge real">👤 Real Learner</div>
+          <button id="btnImStuck" class="btn-stuck">🚨 I'm Stuck</button>
+          <a href="profile.html" class="user-avatar-pill">
+            <div id="topbarAvatarText" class="user-avatar-circle">L</div>
+            <span id="topbarUserName" style="font-size:13px;font-weight:600;color:#fff;">Learner</span>
+          </a>
+          <a href="login.html" class="btn btn-secondary btn-sm">Switch</a>
+        </div>
+      </header>
+
+      <div class="page-body">
+        <div style="margin-bottom: 24px;">
+          <h1 style="font-size:28px; font-weight:900; color:#fff; letter-spacing:-0.03em; margin-bottom:6px;">📝 Diagnostic Skill Assessment</h1>
+          <p style="color:var(--text-secondary); font-size:14px;">Verify your knowledge through AI-generated questions. High scores boost skill confidence and unlock downstream roadmap nodes.</p>
+        </div>
+
+        <!-- Configuration Card -->
+        <div class="card" style="margin-bottom: 24px;">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">Choose Skill & Difficulty</h3>
+              <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">
+                5 targeted conceptual & code questions. Successfully completing an assessment earns +50 XP.
+              </p>
+            </div>
+            <span class="tag tag-medium">AI Evaluated</span>
+          </div>
+
+          <div class="grid-2">
+            <div class="form-group">
+              <label class="form-label">Target Skill</label>
+              <select id="asmtSkillSelect" class="form-select">
+                <option value="Python">Python</option>
+                <option value="NumPy">NumPy</option>
+                <option value="Pandas">Pandas</option>
+                <option value="SQL & Data Querying">SQL & Data Querying</option>
+                <option value="Statistics & Probability">Statistics & Probability</option>
+                <option value="Machine Learning">Machine Learning</option>
+                <option value="HTML5 & Semantic Web">HTML5 & Semantic Web</option>
+                <option value="CSS3 & Modern Layouts">CSS3 & Modern Layouts</option>
+                <option value="JavaScript (ES6+)">JavaScript (ES6+)</option>
+                <option value="Docker & Containers">Docker & Containers</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Difficulty Level</label>
+              <select id="asmtDifficultySelect" class="form-select">
+                <option value="Easy">Easy (Foundations)</option>
+                <option value="Medium" selected>Medium (Application & Problem Solving)</option>
+                <option value="Hard">Hard (Optimization & Edge Cases)</option>
+              </select>
+            </div>
+          </div>
+
+          <button id="btnStartAssessment" class="btn btn-primary" style="width: 100%; padding: 14px; font-weight: 700;">
+            Generate Diagnostic Assessment 🚀
+          </button>
+        </div>
+
+        <!-- Assessment Questions Card -->
+        <div id="assessmentActiveCard" class="card" style="display: none;">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title" id="activeAsmtTitle">Questions</h3>
+              <p style="font-size:12px; color:var(--text-muted); margin-top:4px;">Select the most accurate answer for each prompt</p>
+            </div>
+            <span class="tag tag-medium" id="activeAsmtDiffTag">Medium</span>
+          </div>
+
+          <form id="assessmentSubmissionForm">
+            <div id="questionsContainer" style="display: flex; flex-direction: column; gap: 20px;">
+              <!-- Dynamic questions -->
+            </div>
+
+            <button type="submit" id="btnSubmitAssessment" class="btn btn-primary" style="width: 100%; margin-top: 28px; padding: 14px; font-weight:700;">
+              Submit Answers for Verification ✓
+            </button>
+          </form>
+        </div>
+
+        <!-- Assessment Results Card -->
+        <div id="assessmentResultCard" class="card" style="display: none; margin-top: 24px;">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">📊 Assessment Evaluation & Feedback</h3>
+              <p style="font-size:12px; color:var(--text-muted); margin-top:4px;">Instant AI diagnostic grading</p>
+            </div>
+            <span id="resultScoreBadge" class="tag tag-success" style="font-size: 14px;">Score: 100%</span>
+          </div>
+
+          <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 20px; margin-bottom: 20px;">
+            <h4 style="color: #fff; margin-bottom: 8px; font-size:15px;">Pedagogical Feedback</h4>
+            <p id="resultFeedback" style="font-size: 14px; color: var(--text-secondary); line-height: 1.6;"></p>
+
+            <div style="display: flex; gap: 28px; margin-top: 20px; flex-wrap: wrap;">
+              <div>
+                <span style="font-size: 12px; color: var(--text-dim); text-transform:uppercase; font-weight:600;">Previous Confidence</span>
+                <div id="prevConf" style="font-size: 20px; font-weight: 800; color: #fff;">50%</div>
+              </div>
+              <div>
+                <span style="font-size: 12px; color: var(--text-dim); text-transform:uppercase; font-weight:600;">Updated Confidence</span>
+                <div id="newConf" style="font-size: 20px; font-weight: 800; color: var(--color-success);">75%</div>
+              </div>
+              <div>
+                <span style="font-size: 12px; color: var(--text-dim); text-transform:uppercase; font-weight:600;">XP Awarded</span>
+                <div style="font-size: 20px; font-weight: 800; color: #FCD34D;">+50 XP</div>
+              </div>
+            </div>
+
+            <div id="weakAreasBox" style="margin-top: 18px; display: none; background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239,68,68,0.3); border-radius: 8px; padding: 14px;">
+              <span style="font-size: 12px; color: #f87171; font-weight: 700; text-transform:uppercase;">Identified Misconceptions:</span>
+              <ul id="weakAreasList" style="margin-top: 8px; padding-left: 20px; font-size: 13px; color: #fca5a5; line-height:1.5;"></ul>
+            </div>
+          </div>
+
+          <div id="questionBreakdownBox">
+            <h4 style="color: #fff; margin-bottom: 12px; font-size:15px;">Detailed Question Breakdown</h4>
+            <div id="detailedReviewContainer" style="display: flex; flex-direction: column; gap: 12px;"></div>
+          </div>
+
+          <div style="display: flex; gap: 14px; margin-top: 24px; flex-wrap: wrap;">
+            <a href="roadmap.html" class="btn btn-primary" style="flex: 1; text-align:center;">Back to Roadmap 🗺️</a>
+            <a href="revision.html" class="btn btn-secondary" style="text-align:center;">Review Flashcards 🔄</a>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- Stuck Modal -->
+  <div id="stuckModal" class="modal-overlay">
+    <div class="modal-card">
+      <button id="stuckModalClose" class="modal-close">✕</button>
+      <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+        <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(239, 68, 68, 0.2); display: flex; align-items: center; justify-content: center; font-size: 20px;">🚨</div>
+        <div>
+          <h3 style="font-family: var(--font-heading); font-size: 20px; font-weight: 700; color: #fff;">Need Help? Let's Adapt Your Path</h3>
+          <p style="font-size: 13px; color: var(--text-muted);">EduPath will adaptively insert targeted reinforcement.</p>
+        </div>
+      </div>
+      <form id="stuckForm">
+        <div class="form-group">
+          <label class="form-label">Which skill or concept is blocking you?</label>
+          <input type="text" id="stuckSkillInput" class="form-input" placeholder="e.g. SQL & Data Querying, NumPy, Python" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Specific topic or obstacle (Optional)</label>
+          <input type="text" id="stuckTopicInput" class="form-input" placeholder="e.g. Multi-table JOINs, broadcasting">
+        </div>
+        <button type="button" id="stuckFormSubmit" class="btn btn-primary" style="width: 100%;">Trigger Adaptive Replanning ⚡</button>
+      </form>
+      <div id="stuckInterventionResult" style="display: none;"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    let currentAssessmentId = null;
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const preSkill = urlParams.get("skill");
+      if (preSkill) {
+        const select = document.getElementById("asmtSkillSelect");
+        for (let opt of select.options) {
+          if (opt.value.toLowerCase() === preSkill.toLowerCase()) {
+            select.value = opt.value;
+            break;
+          }
+        }
+      }
+    });
+
+    document.getElementById("btnStartAssessment").addEventListener("click", async () => {
+      const skill = document.getElementById("asmtSkillSelect").value;
+      const diff = document.getElementById("asmtDifficultySelect").value;
+      const btn = document.getElementById("btnStartAssessment");
+
+      btn.disabled = true;
+      btn.innerText = "Synthesizing diagnostic questions...";
+
+      try {
+        const data = await api.post("/assessment/generate", {
+          user_id: getUserId(),
+          skill: skill,
+          difficulty: diff
+        });
+
+        currentAssessmentId = data.id;
+        document.getElementById("activeAsmtTitle").innerText = `Assessment: ${data.skill}`;
+        document.getElementById("activeAsmtDiffTag").innerText = `${data.difficulty} Difficulty`;
+
+        const container = document.getElementById("questionsContainer");
+        container.innerHTML = data.questions.map((q, idx) => `
+          <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); padding: 20px;">
+            <div style="font-weight: 700; color: #fff; font-size: 15px; margin-bottom: 12px; line-height: 1.4;">
+              <span style="color:var(--primary); margin-right:6px;">Q${idx + 1}.</span> ${q.question}
+            </div>
+
+            ${q.code_snippet ? `
+              <pre style="background: #0d1117; padding: 14px; border-radius: 8px; border: 1px solid var(--border-subtle); font-family: monospace; font-size: 13px; color: #93c5fd; margin: 12px 0 16px; overflow-x: auto;">${q.code_snippet}</pre>
+            ` : ''}
+
+            <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 10px;">
+              ${(q.options || []).map((opt) => `
+                <label class="option-card">
+                  <input type="radio" name="answer_${q.id}" value="${opt.replace(/"/g, '&quot;')}" required style="accent-color: var(--primary);">
+                  <span>${opt}</span>
+                </label>
+              `).join("")}
+            </div>
+          </div>
+        `).join("");
+
+        document.getElementById("assessmentActiveCard").style.display = "block";
+        document.getElementById("assessmentResultCard").style.display = "none";
+        document.getElementById("assessmentActiveCard").scrollIntoView({ behavior: "smooth" });
+        showToast("Assessment loaded! Good luck!", "info");
+      } catch (err) {
+        console.error(err);
+      } finally {
+        btn.disabled = false;
+        btn.innerText = "Generate Diagnostic Assessment 🚀";
+      }
+    });
+
+    document.getElementById("assessmentSubmissionForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (!currentAssessmentId) return;
+
+      const form = document.getElementById("assessmentSubmissionForm");
+      const formData = new FormData(form);
+      const answers = {};
+
+      for (let [key, val] of formData.entries()) {
+        const qId = key.replace("answer_", "");
+        answers[qId] = val;
+      }
+
+      const submitBtn = document.getElementById("btnSubmitAssessment");
+      submitBtn.disabled = true;
+      submitBtn.innerText = "Evaluating submission...";
+
+      try {
+        const res = await api.post("/assessment/evaluate", {
+          assessment_id: currentAssessmentId,
+          user_id: getUserId(),
+          answers: answers
+        });
+
+        document.getElementById("assessmentActiveCard").style.display = "none";
+        const resultCard = document.getElementById("assessmentResultCard");
+        resultCard.style.display = "block";
+
+        const badge = document.getElementById("resultScoreBadge");
+        badge.innerText = `Score: ${res.score}% (${res.correct_count}/${res.total_count})`;
+        badge.className = `tag tag-${res.score >= 70 ? 'success' : (res.score >= 50 ? 'medium' : 'critical')}`;
+
+        document.getElementById("resultFeedback").innerText = res.feedback;
+        document.getElementById("prevConf").innerText = `${res.previous_confidence}%`;
+        document.getElementById("newConf").innerText = `${res.updated_confidence}%`;
+
+        if (res.weak_areas && res.weak_areas.length > 0) {
+          const weakBox = document.getElementById("weakAreasBox");
+          weakBox.style.display = "block";
+          document.getElementById("weakAreasList").innerHTML = res.weak_areas.map(w => `<li>${w}</li>`).join("");
+        }
+
+        const breakdown = document.getElementById("detailedReviewContainer");
+        breakdown.innerHTML = (res.answers_detail || []).map((d, i) => `
+          <div style="padding: 14px; background: rgba(255,255,255,0.02); border-left: 3px solid ${d.is_correct ? 'var(--color-success)' : 'var(--color-danger)'}; border-radius: 6px; font-size: 13px;">
+            <div style="font-weight: 600; color: #fff;">Q${i+1}: ${d.question}</div>
+            <div style="color: ${d.is_correct ? '#34d399' : '#f87171'}; margin-top: 6px; font-weight:600;">
+              Your answer: ${d.user_answer} ${d.is_correct ? '✓ Correct' : '✗ Incorrect'}
+            </div>
+            ${!d.is_correct ? `<div style="color: #a5b4fc; margin-top: 3px;">Correct answer: <strong>${d.correct_answer}</strong></div>` : ''}
+            ${d.explanation ? `<div style="color: var(--text-secondary); margin-top: 6px; font-size:12px; line-height:1.4;">💡 Explanation: ${d.explanation}</div>` : ''}
+          </div>
+        `).join("");
+
+        resultCard.scrollIntoView({ behavior: "smooth" });
+        showToast(`Assessment submitted! Score: ${res.score}%`, "info");
+      } catch (err) {
+        console.error(err);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerText = "Submit Answers for Verification ✓";
+      }
+    });
+  </script>
+</body>
+</html>

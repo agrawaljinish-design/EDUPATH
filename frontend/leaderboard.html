@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leaderboard — EduPath</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .podium { display: flex; justify-content: center; align-items: flex-end; gap: 20px; margin-bottom: 40px; }
+    .podium-slot { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+    .podium-block {
+      width: 120px; display: flex; align-items: center; justify-content: center;
+      border-radius: 12px 12px 0 0; font-size: 20px; font-weight: 900; color: #fff;
+    }
+    .podium-block.p1 { height: 120px; background: linear-gradient(135deg, #FFD700, #FFA500); box-shadow: 0 0 30px rgba(255,215,0,0.4); }
+    .podium-block.p2 { height: 90px; background: linear-gradient(135deg, #C0C0C0, #A8A8A8); box-shadow: 0 0 20px rgba(192,192,192,0.3); }
+    .podium-block.p3 { height: 70px; background: linear-gradient(135deg, #CD7F32, #A0522D); box-shadow: 0 0 20px rgba(205,127,50,0.3); }
+    .podium-avatar {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; font-weight: 800; color: #fff;
+    }
+    .timeframe-tabs { display: flex; gap: 4px; background: var(--bg-surface); border-radius: var(--radius-sm); padding: 4px; margin-bottom: 24px; width: fit-content; }
+    .timeframe-tab {
+      padding: 7px 18px; border-radius: 6px; font-size: 13px; font-weight: 600;
+      color: var(--text-muted); cursor: pointer; transition: var(--transition); border: none;
+      background: transparent;
+    }
+    .timeframe-tab.active { background: var(--bg-card); color: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.3); }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo-icon">🎓</div>
+        <div><div class="sidebar-logo-text">EduPath</div><span class="sidebar-badge">Adaptive AI</span></div>
+      </div>
+      <div class="nav-section-title">Personalized Learning</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="dashboard.html"><span class="nav-icon">📊</span> Dashboard</a></li>
+        <li class="nav-item"><a href="profile.html"><span class="nav-icon">👤</span> Learner Profile</a></li>
+        <li class="nav-item"><a href="resume.html"><span class="nav-icon">📄</span> Resume Upload</a></li>
+        <li class="nav-item"><a href="skills.html"><span class="nav-icon">🎯</span> Skill Gaps</a></li>
+        <li class="nav-item"><a href="roadmap.html"><span class="nav-icon">🗺️</span> Roadmap Timeline</a></li>
+        <li class="nav-item"><a href="plan.html"><span class="nav-icon">📅</span> Today's Plan</a></li>
+        <li class="nav-item"><a href="assessment.html"><span class="nav-icon">📝</span> Assessments</a></li>
+        <li class="nav-item"><a href="revision.html"><span class="nav-icon">🔄</span> Revision Queue</a></li>
+        <li class="nav-item"><a href="projects.html"><span class="nav-icon">🚀</span> Projects</a></li>
+        <li class="nav-item"><a href="chat.html"><span class="nav-icon">💬</span> AI Companion</a></li>
+      </ul>
+      <div class="nav-section-title">Peer Collaboration</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="peers.html"><span class="nav-icon">👥</span> Peer Discovery</a></li>
+        <li class="nav-item"><a href="friends.html"><span class="nav-icon">🤝</span> Friends</a></li>
+        <li class="nav-item"><a href="doubts.html"><span class="nav-icon">❓</span> Doubt Forum</a></li>
+        <li class="nav-item"><a href="groups.html"><span class="nav-icon">🏢</span> Study Groups</a></li>
+        <li class="nav-item"><a href="community.html"><span class="nav-icon">🌐</span> Community Feed</a></li>
+      </ul>
+      <div class="nav-section-title">Competitive Learning</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="challenges.html"><span class="nav-icon">⚡</span> Challenges</a></li>
+        <li class="nav-item active"><a href="leaderboard.html"><span class="nav-icon">🏆</span> Leaderboard</a></li>
+        <li class="nav-item"><a href="badges.html"><span class="nav-icon">🎖️</span> Badges</a></li>
+        <li class="nav-item"><a href="progress.html"><span class="nav-icon">📈</span> Analytics</a></li>
+        <li class="nav-item"><a href="reports.html"><span class="nav-icon">📑</span> Weekly Reports</a></li>
+      </ul>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <div class="topbar-search-box">
+            <input type="text" class="topbar-search-input" placeholder="Search learners... (Press /)">
+            <span class="topbar-search-key">/</span>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <div id="topbarStreak" class="metric-pill streak">🔥 1d</div>
+          <div id="topbarXP" class="metric-pill xp">⭐ 0 XP</div>
+          <div id="modeIndicator" class="mode-badge real">👤 Real Learner</div>
+          <button id="btnImStuck" class="btn-stuck">🚨 I'm Stuck</button>
+          <a href="profile.html" class="user-avatar-pill">
+            <div id="topbarAvatarText" class="user-avatar-circle">L</div>
+            <span id="topbarUserName" style="font-size:13px;font-weight:600;color:#fff;">Learner</span>
+          </a>
+          <a href="login.html" class="btn btn-secondary btn-sm">Switch</a>
+        </div>
+      </header>
+
+      <div class="page-body">
+        <h1 style="font-size:28px; font-weight:900; color:#fff; letter-spacing:-0.03em; margin-bottom:6px;">🏆 Global Leaderboard</h1>
+        <p style="color:var(--text-secondary); font-size:14px; margin-bottom:28px;">Compete with peers worldwide. XP is earned by completing tasks, passing assessments, and maintaining streaks.</p>
+
+        <!-- Timeframe Tabs -->
+        <div class="timeframe-tabs">
+          <button class="timeframe-tab active" onclick="switchTab(this, 'global')">All Time</button>
+          <button class="timeframe-tab" onclick="switchTab(this, 'weekly')">This Week</button>
+          <button class="timeframe-tab" onclick="switchTab(this, 'monthly')">This Month</button>
+          <button class="timeframe-tab" onclick="switchTab(this, 'friends')">Friends</button>
+        </div>
+
+        <!-- Top 3 Podium -->
+        <div class="podium" id="podium">
+          <!-- Dynamic -->
+        </div>
+
+        <!-- Full Ranked List -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">📋 Full Rankings</h3>
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span id="myRankBadge" class="badge badge-primary" style="display:none;"></span>
+              <span style="font-size:12px; color:var(--text-muted);" id="totalLearners">— learners</span>
+            </div>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Learner</th>
+                <th>Target Role</th>
+                <th>Streak</th>
+                <th>Total XP</th>
+              </tr>
+            </thead>
+            <tbody id="leaderboardBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div id="stuckModal" class="modal-overlay">
+    <div class="modal-card">
+      <button id="stuckModalClose" class="modal-close">✕</button>
+      <h3 style="font-size:20px; font-weight:800; color:#fff; margin-bottom:6px;">🚨 Need Help?</h3>
+      <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px;">
+        <button type="button" class="stuck-reason-chip selected" data-reason="I don't understand the concept">I don't understand the concept</button>
+        <button type="button" class="stuck-reason-chip" data-reason="I'm getting wrong answers">I'm getting wrong answers</button>
+        <button type="button" class="stuck-reason-chip" data-reason="The exercises are too difficult">Exercises too difficult</button>
+        <button type="button" class="stuck-reason-chip" data-reason="Something else...">Something else...</button>
+      </div>
+      <input type="hidden" id="stuckReasonChoice" value="I don't understand the concept">
+      <div class="form-group"><label class="form-label">Blocking skill</label><input type="text" id="stuckSkillInput" class="form-input" placeholder="e.g. SQL & Data Querying"></div>
+      <div class="form-group"><label class="form-label">Specific topic</label><input type="text" id="stuckTopicInput" class="form-input" placeholder="e.g. Multi-table JOINs"></div>
+      <button id="stuckFormSubmit" class="btn btn-primary" style="width:100%;">Trigger Adaptive Replanning ⚡</button>
+      <div id="stuckInterventionResult" style="display:none; margin-top:20px;"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    let uid, allLearners = [], currentTab = "global";
+    document.addEventListener("DOMContentLoaded", async () => {
+      uid = getUserId();
+      await loadLeaderboard("global");
+    });
+
+    async function switchTab(btn, tab) {
+      document.querySelectorAll(".timeframe-tab").forEach(t => t.classList.remove("active"));
+      btn.classList.add("active");
+      currentTab = tab;
+      await loadLeaderboard(tab);
+    }
+
+    async function loadLeaderboard(tab) {
+      const selected = tab || currentTab || "global";
+      try {
+        let data;
+        if (selected === "friends") {
+          data = await api.get(`/leaderboard/friends/${encodeURIComponent(uid)}`);
+        } else {
+          const timeframe = selected === "all" ? "global" : selected;
+          data = await api.get(`/leaderboard?timeframe=${encodeURIComponent(timeframe)}`);
+        }
+        allLearners = data.leaderboard || [];
+        renderLeaderboard(allLearners);
+      } catch(e) {
+        document.getElementById("podium").innerHTML = "";
+        document.getElementById("leaderboardBody").innerHTML = "<tr><td colspan='5' style='text-align:center; color:var(--text-muted); padding:30px;'>Could not load leaderboard</td></tr>";
+      }
+    }
+
+    function renderLeaderboard(list) {
+      document.getElementById("totalLearners").innerText = `${list.length} learners`;
+      
+      // Podium (top 3)
+      const top3 = list.slice(0, 3);
+      const podiumOrder = top3.length >= 3 ? [top3[1], top3[0], top3[2]] : top3;
+      const podiumClasses = top3.length >= 3 ? ["p2", "p1", "p3"] : ["p1", "p2"];
+      const podiumRankNums = top3.length >= 3 ? [2, 1, 3] : [1, 2];
+      const medalEmojis = { 1: "🥇", 2: "🥈", 3: "🥉" };
+
+      document.getElementById("podium").innerHTML = podiumOrder.map((p, i) => {
+        if (!p) return "";
+        const cls = podiumClasses[i];
+        const rankNum = podiumRankNums[i];
+        const isMe = p.user_id === uid;
+        return `
+        <div class="podium-slot" style="${cls === 'p1' ? 'order: 2; z-index: 2;' : (cls === 'p2' ? 'order:1;' : 'order:3;')}">
+          <div class="podium-avatar" style="${isMe ? 'box-shadow: 0 0 20px rgba(124,58,237,0.5); border:2px solid #7C3AED;' : ''}">${(p.display_name || 'U')[0]}</div>
+          <div style="font-size:14px; font-weight:700; color:#fff; text-align:center;">${p.display_name}</div>
+          <div style="font-size:12px; color:var(--text-muted);">${p.xp} XP</div>
+          ${isMe ? '<span class="badge badge-primary">You</span>' : ''}
+          <div class="podium-block ${cls}">${medalEmojis[rankNum]}</div>
+        </div>`;
+      }).join("");
+
+      // My rank
+      const myEntry = list.find(e => e.user_id === uid);
+      const badge = document.getElementById("myRankBadge");
+      if (myEntry) {
+        badge.style.display = "inline-flex";
+        badge.innerText = `Your Rank: #${myEntry.rank}`;
+      } else {
+        badge.style.display = "none";
+      }
+
+      if (list.length === 0) {
+        document.getElementById("leaderboardBody").innerHTML = "<tr><td colspan='5' style='text-align:center; color:var(--text-muted); padding:30px;'>No rankings available for this view yet.</td></tr>";
+        return;
+      }
+
+      // Full table
+      document.getElementById("leaderboardBody").innerHTML = list.map(e => {
+        const isMe = e.user_id === uid;
+        const rankClass = e.rank === 1 ? "rank-1" : (e.rank === 2 ? "rank-2" : (e.rank === 3 ? "rank-3" : ""));
+        return `
+        <tr style="${isMe ? 'background:rgba(124,58,237,0.06);' : ''}">
+          <td><span class="rank-badge ${rankClass}">#${e.rank}</span></td>
+          <td>
+            <div style="display:flex; align-items:center; gap:10px;">
+              <div class="user-avatar-circle" style="width:30px;height:30px;font-size:12px;flex-shrink:0;">${(e.display_name||'U')[0]}</div>
+              <div>
+                <div style="font-weight:600;color:#fff;font-size:14px;">${e.display_name} ${isMe ? '<span class="badge badge-success" style="font-size:9px;">You</span>' : ''}</div>
+              </div>
+            </div>
+          </td>
+          <td style="color:var(--text-secondary); font-size:13px;">${e.target_role || "—"}</td>
+          <td><span style="color:#FBBF24; font-weight:700;">🔥 ${e.streak}d</span></td>
+          <td><strong style="color:#FCD34D; font-size:15px;">${e.xp} XP</strong></td>
+        </tr>`;
+      }).join("");
+    }
+  </script>
+</body>
+</html>

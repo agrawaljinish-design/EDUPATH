@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Today's Plan — EduPath</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .goal-ring-wrap {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      background: linear-gradient(135deg, rgba(124,58,237,0.1), rgba(6,182,212,0.06));
+      border: 1px solid rgba(124,58,237,0.3);
+      border-radius: var(--radius-lg);
+      padding: 24px 28px;
+      margin-bottom: 28px;
+    }
+    .goal-ring {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: conic-gradient(#7C3AED 0%, #22C55E var(--progress), rgba(255,255,255,0.07) var(--progress) 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; font-weight: 800; color: #fff;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .task-type-chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 4px 10px; border-radius: var(--radius-full);
+      font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px;
+    }
+    .chip-learn { background: rgba(124,58,237,0.15); color: #C4B5FD; border: 1px solid rgba(124,58,237,0.3); }
+    .chip-practice { background: rgba(6,182,212,0.15); color: #67E8F9; border: 1px solid rgba(6,182,212,0.3); }
+    .chip-revise { background: rgba(245,158,11,0.15); color: #FBBF24; border: 1px solid rgba(245,158,11,0.3); }
+    .chip-project { background: rgba(34,197,94,0.15); color: #4ADE80; border: 1px solid rgba(34,197,94,0.3); }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo-icon">🎓</div>
+        <div><div class="sidebar-logo-text">EduPath</div><span class="sidebar-badge">Adaptive AI</span></div>
+      </div>
+      <div class="nav-section-title">Personalized Learning</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="dashboard.html"><span class="nav-icon">📊</span> Dashboard</a></li>
+        <li class="nav-item"><a href="profile.html"><span class="nav-icon">👤</span> Learner Profile</a></li>
+        <li class="nav-item"><a href="resume.html"><span class="nav-icon">📄</span> Resume Upload</a></li>
+        <li class="nav-item"><a href="skills.html"><span class="nav-icon">🎯</span> Skill Gaps</a></li>
+        <li class="nav-item"><a href="roadmap.html"><span class="nav-icon">🗺️</span> Roadmap Timeline</a></li>
+        <li class="nav-item active"><a href="plan.html"><span class="nav-icon">📅</span> Today's Plan</a></li>
+        <li class="nav-item"><a href="assessment.html"><span class="nav-icon">📝</span> Assessments</a></li>
+        <li class="nav-item"><a href="revision.html"><span class="nav-icon">🔄</span> Revision Queue</a></li>
+        <li class="nav-item"><a href="projects.html"><span class="nav-icon">🚀</span> Projects</a></li>
+        <li class="nav-item"><a href="chat.html"><span class="nav-icon">💬</span> AI Companion</a></li>
+      </ul>
+      <div class="nav-section-title">Peer Collaboration</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="peers.html"><span class="nav-icon">👥</span> Peer Discovery</a></li>
+        <li class="nav-item"><a href="friends.html"><span class="nav-icon">🤝</span> Friends</a></li>
+        <li class="nav-item"><a href="doubts.html"><span class="nav-icon">❓</span> Doubt Forum</a></li>
+        <li class="nav-item"><a href="groups.html"><span class="nav-icon">🏢</span> Study Groups</a></li>
+        <li class="nav-item"><a href="community.html"><span class="nav-icon">🌐</span> Community Feed</a></li>
+      </ul>
+      <div class="nav-section-title">Competitive Learning</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="challenges.html"><span class="nav-icon">⚡</span> Challenges</a></li>
+        <li class="nav-item"><a href="leaderboard.html"><span class="nav-icon">🏆</span> Leaderboard</a></li>
+        <li class="nav-item"><a href="badges.html"><span class="nav-icon">🎖️</span> Badges</a></li>
+        <li class="nav-item"><a href="progress.html"><span class="nav-icon">📈</span> Analytics</a></li>
+        <li class="nav-item"><a href="reports.html"><span class="nav-icon">📑</span> Weekly Reports</a></li>
+      </ul>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <div class="topbar-search-box">
+            <input type="text" class="topbar-search-input" placeholder="Search today's tasks... (Press /)">
+            <span class="topbar-search-key">/</span>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <div id="topbarStreak" class="metric-pill streak">🔥 1d</div>
+          <div id="topbarXP" class="metric-pill xp">⭐ 0 XP</div>
+          <div id="modeIndicator" class="mode-badge real">👤 Real Learner</div>
+          <button id="btnImStuck" class="btn-stuck">🚨 I'm Stuck</button>
+          <a href="profile.html" class="user-avatar-pill">
+            <div id="topbarAvatarText" class="user-avatar-circle">L</div>
+            <span id="topbarUserName" style="font-size:13px;font-weight:600;color:#fff;">Learner</span>
+          </a>
+          <a href="login.html" class="btn btn-secondary btn-sm">Switch</a>
+        </div>
+      </header>
+
+      <div class="page-body">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px; margin-bottom:24px;">
+          <div>
+            <h1 style="font-size:28px; font-weight:900; color:#fff; letter-spacing:-0.03em; margin-bottom:6px;">📅 Today's Adaptive Study Plan</h1>
+            <p style="color:var(--text-secondary); font-size:14px;">Personalized tasks aligned to your top skill gaps. Complete all for maximum XP and streak preservation.</p>
+          </div>
+          <div style="font-size:13px; color:var(--text-muted);" id="planDate">—</div>
+        </div>
+
+        <!-- Goal Ring + Today's Objective -->
+        <div class="goal-ring-wrap">
+          <div class="goal-ring" id="goalRing" style="--progress: 0%;">
+            <span id="goalRingPct">0%</span>
+          </div>
+          <div style="flex:1;">
+            <div style="font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; color:var(--text-muted); margin-bottom:6px;">Today's Goal</div>
+            <div id="todayGoal" style="font-size:17px; font-weight:700; color:#fff; margin-bottom:6px;">Loading...</div>
+            <div style="display:flex; gap:14px; flex-wrap:wrap; font-size:13px; color:var(--text-secondary);">
+              <span>⏱ <span id="totalTime">—</span> total study time</span>
+              <span>⭐ <span id="totalXP">—</span> XP available today</span>
+              <span id="completedCount" style="color:var(--color-success);">— tasks left</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Task Sections -->
+        <div class="grid-2" style="margin-bottom:24px;">
+          <!-- Learn Tasks -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">📖 LEARN</h3>
+                <p style="font-size:12px; color:var(--text-muted);">New concept modules to study</p>
+              </div>
+              <span class="task-type-chip chip-learn">Learning</span>
+            </div>
+            <div id="learnList" style="display:flex; flex-direction:column; gap:10px;">
+              <div style="color:var(--text-muted); font-size:13px; text-align:center; padding:20px;">Loading...</div>
+            </div>
+          </div>
+
+          <!-- Practice Tasks -->
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">🏋️ PRACTICE</h3>
+                <p style="font-size:12px; color:var(--text-muted);">Exercises and problem sets</p>
+              </div>
+              <span class="task-type-chip chip-practice">Practice</span>
+            </div>
+            <div id="practiceList" style="display:flex; flex-direction:column; gap:10px;">
+              <div style="color:var(--text-muted); font-size:13px; text-align:center; padding:20px;">Loading...</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Revise Tasks (full width) -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">🔄 REVISE</h3>
+              <p style="font-size:12px; color:var(--text-muted);">Spaced repetition review queue — don't skip these!</p>
+            </div>
+            <div style="display:flex; gap:8px;">
+              <span class="task-type-chip chip-revise">Revision</span>
+              <a href="revision.html" class="btn btn-secondary btn-sm">Flashcards</a>
+            </div>
+          </div>
+          <div id="reviseList" style="display:flex; flex-direction:column; gap:10px;">
+            <div style="color:var(--text-muted); font-size:13px; text-align:center; padding:20px;">Loading revision queue...</div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- I'm Stuck Modal -->
+  <div id="stuckModal" class="modal-overlay">
+    <div class="modal-card">
+      <button id="stuckModalClose" class="modal-close">✕</button>
+      <h3 style="font-size:20px; font-weight:800; color:#fff; margin-bottom:6px;">🚨 Need Help?</h3>
+      <p style="color:var(--text-muted); font-size:13px; margin-bottom:20px;">EduPath will adapt your plan and insert targeted scaffolding.</p>
+      <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px;">
+        <button type="button" class="stuck-reason-chip selected" data-reason="I don't understand the concept">I don't understand the concept</button>
+        <button type="button" class="stuck-reason-chip" data-reason="I'm getting wrong answers">I'm getting wrong answers</button>
+        <button type="button" class="stuck-reason-chip" data-reason="The exercises are too difficult">Exercises too difficult</button>
+        <button type="button" class="stuck-reason-chip" data-reason="Something else...">Something else...</button>
+      </div>
+      <input type="hidden" id="stuckReasonChoice" value="I don't understand the concept">
+      <div class="form-group"><label class="form-label">Blocking skill</label><input type="text" id="stuckSkillInput" class="form-input" placeholder="e.g. SQL & Data Querying"></div>
+      <div class="form-group"><label class="form-label">Specific topic</label><input type="text" id="stuckTopicInput" class="form-input" placeholder="e.g. Multi-table JOINs"></div>
+      <button id="stuckFormSubmit" class="btn btn-primary" style="width:100%;">Trigger Adaptive Replanning ⚡</button>
+      <div id="stuckInterventionResult" style="display:none; margin-top:20px;"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    let uid, completedToday = 0, totalTasks = 0;
+    const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+
+    document.addEventListener("DOMContentLoaded", async () => {
+      uid = getUserId();
+      const now = new Date();
+      document.getElementById("planDate").innerText = `${days[now.getDay()]}, ${months[now.getMonth()]} ${now.getDate()} ${now.getFullYear()}`;
+      await loadPlan();
+    });
+
+    function taskCard(act) {
+      return `
+      <div id="task-${act.id}" style="display:flex; justify-content:space-between; align-items:center; padding:14px 16px; background:rgba(255,255,255,0.02); border:1px solid var(--border-subtle); border-radius:10px; gap:12px; transition:all 0.2s;">
+        <div style="flex:1; min-width:0;">
+          <div style="font-size:14px; font-weight:600; color:#fff; margin-bottom:3px;">${act.title}</div>
+          <div style="font-size:12px; color:var(--text-muted);">
+            <span style="color:#C4B5FD;">${act.skill}</span> &nbsp;•&nbsp; ~${act.duration_minutes || 30} min &nbsp;•&nbsp; +${act.xp} XP
+          </div>
+        </div>
+        <button class="btn btn-outline btn-sm" onclick="markComplete('${act.id}','${act.skill}','${act.title.replace(/'/g,"\\'")}','${act.type}', this)">
+          Complete ✓
+        </button>
+      </div>`;
+    }
+
+    async function loadPlan() {
+      try {
+        const plan = await api.get(`/plan/today?user_id=${uid}`);
+        document.getElementById("todayGoal").innerText = plan.today_objective || "Master today's focus skill with practice and reflection.";
+        
+        const learn = plan.learning_activities || [];
+        const practice = plan.practice_tasks || [];
+        const revise = plan.revision_tasks || [];
+        totalTasks = learn.length + practice.length + revise.length;
+        const minutes = plan.estimated_minutes || [...learn, ...practice, ...revise].reduce((sum, t) => sum + (t.duration_minutes || 0), 0);
+        const xpAvailable = [...learn, ...practice, ...revise].reduce((sum, t) => sum + (t.xp || 0), 0);
+        document.getElementById("totalTime").innerText = `${minutes} min`;
+        document.getElementById("totalXP").innerText = `${xpAvailable}`;
+        document.getElementById("completedCount").innerText = `0 / ${totalTasks} tasks done`;
+
+        document.getElementById("learnList").innerHTML = learn.length > 0
+          ? learn.map(taskCard).join("")
+          : "<p style='color:var(--text-muted); text-align:center; padding:16px;'>No learn tasks today. Great progress!</p>";
+
+        document.getElementById("practiceList").innerHTML = practice.length > 0
+          ? practice.map(taskCard).join("")
+          : "<p style='color:var(--text-muted); text-align:center; padding:16px;'>No practice tasks. Try a challenge!</p>";
+
+        document.getElementById("reviseList").innerHTML = revise.length > 0
+          ? revise.map(taskCard).join("")
+          : "<p style='color:var(--text-muted); text-align:center; padding:16px;'>Revision queue is clear — great job keeping up!</p>";
+      } catch(e) {
+        console.error(e);
+      }
+    }
+
+    async function markComplete(actId, skill, title, type, btn) {
+      btn.disabled = true;
+      btn.innerText = "Done ✓";
+      btn.style.borderColor = "var(--color-success)";
+      btn.style.color = "var(--color-success)";
+      try {
+        const res = await api.post("/activity/complete", {
+          user_id: uid, activity_id: actId, skill, title, activity_type: type, time_spent_minutes: 30
+        });
+        showToast(`+${res.xp_awarded} XP earned! Keep going! 🔥`, "success");
+        completedToday++;
+        const pct = Math.round((completedToday / totalTasks) * 100);
+        document.getElementById("goalRing").style.setProperty("--progress", pct + "%");
+        document.getElementById("goalRingPct").innerText = pct + "%";
+        document.getElementById("completedCount").innerText = `${completedToday} / ${totalTasks} tasks done`;
+        document.getElementById("topbarXP").innerText = `⭐ ${res.total_xp} XP`;
+      } catch(e) {
+        btn.disabled = false;
+        btn.innerText = "Complete ✓";
+        btn.style.borderColor = "";
+        btn.style.color = "";
+        showToast(e.message || "Could not complete activity.", "error");
+      }
+    }
+  </script>
+</body>
+</html>

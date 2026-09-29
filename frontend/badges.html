@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Badges & Achievements — EduPath</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .badge-card {
+      background: var(--bg-card); border: 1px solid var(--border-card);
+      border-radius: var(--radius-lg); padding: 24px; text-align: center;
+      transition: all 0.3s ease; position: relative; overflow: hidden;
+    }
+    .badge-card.earned { border-color: rgba(252,211,77,0.4); }
+    .badge-card.earned::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at top, rgba(252,211,77,0.06), transparent 60%);
+    }
+    .badge-card:not(.earned) { opacity: 0.5; filter: grayscale(1); }
+    .badge-card.earned:hover { transform: translateY(-6px); box-shadow: 0 0 30px rgba(252,211,77,0.2); border-color: rgba(252,211,77,0.6); }
+    .badge-emoji { font-size: 44px; margin-bottom: 14px; display: block; }
+    .badge-card.earned .badge-emoji { filter: none; animation: badgePulse 3s infinite; }
+    @keyframes badgePulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.1);} }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo-icon">🎓</div>
+        <div><div class="sidebar-logo-text">EduPath</div><span class="sidebar-badge">Adaptive AI</span></div>
+      </div>
+      <div class="nav-section-title">Personalized Learning</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="dashboard.html"><span class="nav-icon">📊</span> Dashboard</a></li>
+        <li class="nav-item"><a href="profile.html"><span class="nav-icon">👤</span> Learner Profile</a></li>
+        <li class="nav-item"><a href="resume.html"><span class="nav-icon">📄</span> Resume Upload</a></li>
+        <li class="nav-item"><a href="skills.html"><span class="nav-icon">🎯</span> Skill Gaps</a></li>
+        <li class="nav-item"><a href="roadmap.html"><span class="nav-icon">🗺️</span> Roadmap Timeline</a></li>
+        <li class="nav-item"><a href="plan.html"><span class="nav-icon">📅</span> Today's Plan</a></li>
+        <li class="nav-item"><a href="assessment.html"><span class="nav-icon">📝</span> Assessments</a></li>
+        <li class="nav-item"><a href="revision.html"><span class="nav-icon">🔄</span> Revision Queue</a></li>
+        <li class="nav-item"><a href="projects.html"><span class="nav-icon">🚀</span> Projects</a></li>
+        <li class="nav-item"><a href="chat.html"><span class="nav-icon">💬</span> AI Companion</a></li>
+      </ul>
+      <div class="nav-section-title">Peer Collaboration</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="peers.html"><span class="nav-icon">👥</span> Peer Discovery</a></li>
+        <li class="nav-item"><a href="friends.html"><span class="nav-icon">🤝</span> Friends</a></li>
+        <li class="nav-item"><a href="doubts.html"><span class="nav-icon">❓</span> Doubt Forum</a></li>
+        <li class="nav-item"><a href="groups.html"><span class="nav-icon">🏢</span> Study Groups</a></li>
+        <li class="nav-item"><a href="community.html"><span class="nav-icon">🌐</span> Community Feed</a></li>
+      </ul>
+      <div class="nav-section-title">Competitive Learning</div>
+      <ul class="nav-menu">
+        <li class="nav-item"><a href="challenges.html"><span class="nav-icon">⚡</span> Challenges</a></li>
+        <li class="nav-item"><a href="leaderboard.html"><span class="nav-icon">🏆</span> Leaderboard</a></li>
+        <li class="nav-item active"><a href="badges.html"><span class="nav-icon">🎖️</span> Badges</a></li>
+        <li class="nav-item"><a href="progress.html"><span class="nav-icon">📈</span> Analytics</a></li>
+        <li class="nav-item"><a href="reports.html"><span class="nav-icon">📑</span> Weekly Reports</a></li>
+      </ul>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <div class="topbar-search-box">
+            <input type="text" class="topbar-search-input" placeholder="Search badges... (Press /)">
+            <span class="topbar-search-key">/</span>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <div id="topbarStreak" class="metric-pill streak">🔥 1d</div>
+          <div id="topbarXP" class="metric-pill xp">⭐ 0 XP</div>
+          <div id="modeIndicator" class="mode-badge real">👤 Real Learner</div>
+          <button id="btnImStuck" class="btn-stuck">🚨 I'm Stuck</button>
+          <a href="profile.html" class="user-avatar-pill">
+            <div id="topbarAvatarText" class="user-avatar-circle">L</div>
+            <span id="topbarUserName" style="font-size:13px;font-weight:600;color:#fff;">Learner</span>
+          </a>
+          <a href="login.html" class="btn btn-secondary btn-sm">Switch</a>
+        </div>
+      </header>
+
+      <div class="page-body">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:28px; flex-wrap:wrap; gap:12px;">
+          <div>
+            <h1 style="font-size:28px; font-weight:900; color:#fff; letter-spacing:-0.03em; margin-bottom:6px;">🎖️ Badges & Achievements</h1>
+            <p style="color:var(--text-secondary); font-size:14px;">Track your milestones. Every badge is earned by real progress — never purchased.</p>
+          </div>
+          <div style="display:flex; align-items:center; gap:10px;">
+            <span style="font-size:14px; color:var(--text-muted);">Earned:</span>
+            <span id="earnedCount" style="font-size:20px; font-weight:800; color:#FCD34D;">—</span>
+            <span style="font-size:14px; color:var(--text-muted);">/ <span id="totalCount">—</span></span>
+          </div>
+        </div>
+
+        <!-- Badges Grid -->
+        <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(180px, 1fr)); gap:18px;" id="badgeGrid">
+          <div style="grid-column:1/-1; text-align:center; padding:40px; color:var(--text-muted);">Loading badges...</div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div id="stuckModal" class="modal-overlay">
+    <div class="modal-card">
+      <button id="stuckModalClose" class="modal-close">✕</button>
+      <h3 style="font-size:20px; font-weight:800; color:#fff; margin-bottom:6px;">🚨 Need Help?</h3>
+      <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px;">
+        <button type="button" class="stuck-reason-chip selected" data-reason="I don't understand the concept">I don't understand the concept</button>
+        <button type="button" class="stuck-reason-chip" data-reason="I'm getting wrong answers">I'm getting wrong answers</button>
+        <button type="button" class="stuck-reason-chip" data-reason="The exercises are too difficult">Exercises too difficult</button>
+        <button type="button" class="stuck-reason-chip" data-reason="Something else...">Something else...</button>
+      </div>
+      <input type="hidden" id="stuckReasonChoice" value="I don't understand the concept">
+      <div class="form-group"><label class="form-label">Blocking skill</label><input type="text" id="stuckSkillInput" class="form-input" placeholder="e.g. SQL & Data Querying"></div>
+      <div class="form-group"><label class="form-label">Specific topic</label><input type="text" id="stuckTopicInput" class="form-input" placeholder="e.g. Multi-table JOINs"></div>
+      <button id="stuckFormSubmit" class="btn btn-primary" style="width:100%;">Trigger Adaptive Replanning ⚡</button>
+      <div id="stuckInterventionResult" style="display:none; margin-top:20px;"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    // Hardcoded badge catalogue (all possible badges)
+    const ALL_BADGES = [
+      { id: "badge_first_assessment", emoji: "🎯", name: "First Assessment", desc: "Completed your first diagnostic skill assessment!" },
+      { id: "badge_streak_7", emoji: "🔥", name: "7 Day Streak", desc: "Maintained daily study momentum for 7 consecutive days!" },
+      { id: "badge_helpful_peer", emoji: "🤝", name: "Helpful Peer", desc: "Answered a peer doubt and received a helpful upvote!" },
+      { id: "badge_project_builder", emoji: "🚀", name: "Project Builder", desc: "Successfully completed a hands-on portfolio project!" },
+      { id: "badge_roadmap_finisher", emoji: "🏆", name: "Roadmap Finisher", desc: "Completed all milestones in your active learning path!" },
+      { id: "badge_challenge_master", emoji: "⚡", name: "Challenge Champion", desc: "Completed an active community learning challenge!" },
+      { id: "badge_skill_master", emoji: "👑", name: "Skill Master", desc: "Achieved 90%+ confidence in a target role skill!" },
+    ];
+
+    document.addEventListener("DOMContentLoaded", async () => {
+      const uid = getUserId();
+      let earnedIds = [];
+      try {
+        const data = await api.get(`/badges/${uid}`);
+        const badges = data.badges || [];
+        earnedIds = badges.filter(b => b.unlocked).map(b => b.id || b.badge_id);
+        document.getElementById("earnedCount").innerText = earnedIds.length;
+        document.getElementById("totalCount").innerText = ALL_BADGES.length;
+      } catch(e) {
+        document.getElementById("earnedCount").innerText = "0";
+        document.getElementById("totalCount").innerText = ALL_BADGES.length;
+      }
+
+      const grid = document.getElementById("badgeGrid");
+      grid.innerHTML = ALL_BADGES.map(b => {
+        const isEarned = earnedIds.includes(b.id);
+        return `
+        <div class="badge-card ${isEarned ? 'earned' : ''}">
+          ${isEarned ? '<div style="position:absolute;top:10px;right:10px;font-size:12px;color:#FCD34D;font-weight:700;">✓ EARNED</div>' : ''}
+          <span class="badge-emoji">${b.emoji}</span>
+          <div style="font-size:14px; font-weight:700; color:#fff; margin-bottom:6px;">${b.name}</div>
+          <div style="font-size:12px; color:var(--text-muted); line-height:1.4;">${b.desc}</div>
+          ${!isEarned ? '<div style="margin-top:8px; font-size:11px; color:var(--text-muted);">🔒 Not yet earned</div>' : ''}
+        </div>`;
+      }).join("");
+    });
+  </script>
+</body>
+</html>
